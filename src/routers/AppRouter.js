@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Redirect
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { startCheckin } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
