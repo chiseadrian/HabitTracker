@@ -1,0 +1,51 @@
+
+
+.habitscreen__main-content{
+    display: flex;
+}
+
+.table-title{
+    text-align: center;
+}
+
+// week
+.week__days-title{
+    color: $primary;
+}
+.week__done-title{
+    color: green;
+}
+.week__goal-title{
+    color: #427ab3;
+}
+.week__title-color{
+    color: #847616;
+}
+.editable{
+    outline-offset: initial;
+
+    &:focus{
+        color: $primary;
+        outline-color: #c4e8ef;
+    }
+}
+
+.inputWeek{
+    background-color: rgba(96, 108, 110, 0.15);
+    border: 0 solid transparent;
+    border-radius: 4px;
+    color: #606c6e;;
+    outline-color: $primary;
+    padding: 5px 9px;
+    width: 60px;
+}
+
+.changed{
+    color: #218c50 !important;
+    border: 2px solid #218c50;
+}
+
+.input-error{
+    color: red !important;
+    border: 2px solid red !important;
+}

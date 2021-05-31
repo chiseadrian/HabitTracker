@@ -1,0 +1,107 @@
+
+/* Modal */
+.ReactModalPortal > div{
+    opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: opacity .2s ease-in-out;
+    z-index: 999;
+}
+
+.modal-fondo {
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    position: fixed;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+}
+
+.modal {
+    background: white;
+    border-radius: 5px;
+    color: rgb(51, 51, 51);
+    display: inline;
+    max-height: 330px;
+    max-width: 500px;
+    outline: none;
+    overflow: visible;
+    padding: 10px;
+}
+
+.text-area{
+    resize: none;
+}
+
+.modal-border {
+    &:focus{
+        outline: none !important;
+        border:1px solid $primary;
+        box-shadow: 0 0 10px $primary;
+    }
+}
+
+.modal-border-error {
+    &:focus{
+        outline: none !important;
+        border:1px solid red;
+        box-shadow: 0 0 10px red;
+    }
+}
+
+.modal-title{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.modal-delete{
+    margin-bottom: 10px;
+}
+
+.modal-delete-list-column{
+    color: $primary;
+    cursor: pointer;
+    font-size: 23px;
+    margin-left: 5px;
+    margin-top: 1px;
+    text-align: center;
+    
+    &:hover{
+        color: red;
+    }
+}
+
+.modal-input-column{
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.modal-add-column{
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+
+    &:hover{
+        color: $primary;
+    }
+}
+
+.react-datetime-picker__wrapper{
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}   

@@ -1,0 +1,93 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-container form{
+    padding: 10%;
+}
+
+.row{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.btnSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+    transition: opacity .2s ease-in-out;
+}
+
+.login-form{
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+
+    h3{
+        text-align: center;
+        color: #333;
+    }
+
+    .btnSubmit{
+        color: #fff;
+        background-color: $primary;
+        box-shadow: 0 0 10px $primary;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .ForgetPwd{
+        color: $primary;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .login-input{
+        margin-bottom: 6px;
+        &:focus{
+            outline: none !important;
+            border:1px solid $primary;
+            box-shadow: 0 0 10px $primary;
+        }
+    }
+}
+
+.register-form{
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+    background: $primary;
+    
+    h3{
+        text-align: center;
+        color: #fff;
+    }
+
+    .btnSubmit{
+        background-color: #fff;
+        box-shadow: 0 0 10px white;
+        color: $primary;
+        margin-top: 10px;
+        width: 100%;
+    }
+    .ForgetPwd{
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .register-input{
+        margin-bottom: 6px;
+        &:focus{
+            outline: none !important;
+            border:1px solid white;
+            box-shadow: 0 0 10px white;
+        }
+    }
+}
+

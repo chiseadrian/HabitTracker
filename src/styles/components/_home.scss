@@ -1,0 +1,39 @@
+.home__main-content{
+    align-items: center;
+    background-color: #232323;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    height: 100%;
+    width: 100%;
+    
+    p {
+        text-align: center;
+    }
+}
+
+.centered{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 89%;
+}
+
+.centered-bottom{
+    text-align: center;
+    height: 10%;
+}
+
+.home-time{
+    font-size: 1050%;
+    letter-spacing: -5px;
+    text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
+}
+
+.quote{
+    text-shadow: 2px 8px 6px rgb(0 0 0 / 20%), 0px -5px 35px rgb(255 255 255 / 30%);
+}
+.quote-author{
+    font-family: Times New Roman; 
+}

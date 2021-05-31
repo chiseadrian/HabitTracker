@@ -1,0 +1,54 @@
+
+.timer{
+    display: flex;
+    font-size: 100px;
+    justify-content: center;
+    text-shadow: gray 3px 5px 2px;
+    color: white;
+}
+.minutes{
+    width: 420px;
+}
+.milliseconds{
+    font-size: 60px;
+    margin-top: 45px;
+    width: 80px;
+}
+
+.start-timer{
+    background: white;
+    border: 3px solid $primary;
+    border-radius: 100%;
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    color: $primary;
+    font-size: large;
+    height: 60px;
+    margin-right: 15px;
+    width: 60px;
+
+    &:hover{
+        background: $primary;
+        color: white;
+    }
+}
+
+.button-timer{
+    background: white;
+    border-radius: 100%;
+    border: 3px solid black;
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    color: black;
+    height: 60px;
+    margin-right: 15px;
+    width: 60px;
+
+    &:hover{
+        background-color: black; 
+        color: white;
+    }
+    &:disabled{
+        background-color: white;
+        border: 3px solid gray;
+        color: gray;
+    }
+}

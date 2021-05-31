@@ -1,0 +1,84 @@
+.notes{
+    overflow:hidden;
+    padding:3em;
+}
+
+// Note
+.note{
+    margin:1em;
+    float:left;
+    list-style:none;
+
+    p{
+        font-family:"Reenie Beanie",arial,sans-serif;
+        font-size:160%;
+        white-space: pre;
+        max-height: inherit;
+        text-overflow: ellipsis;
+    }
+
+    h2{
+        font-size:140%;
+        font-weight:bold;
+        padding-bottom:10px;
+    }
+
+    &:hover, &:focus{
+        box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        position:relative;
+        z-index:5;
+        -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
+        -moz-transform: scale(1.25);
+        -o-transform: scale(1.25);
+        -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7);
+        -webkit-transform: scale(1.25);
+    }
+
+    //inclinacion de la nota
+    &:nth-child(even) div{
+        -o-transform:rotate(4deg);
+        -webkit-transform:rotate(4deg);
+        -moz-transform:rotate(4deg);
+        position:relative;
+        top:5px;
+        background:#cfc;
+    }
+    &:nth-child(3n) div{
+        -o-transform:rotate(-3deg);
+        -webkit-transform:rotate(-3deg);
+        -moz-transform:rotate(-3deg);
+        position:relative;
+        top:-5px;
+        background:#ccf;
+    }
+    &:nth-child(5n) div{
+        -o-transform:rotate(5deg);
+        -webkit-transform:rotate(5deg);
+        -moz-transform:rotate(5deg);
+        position:relative;
+        top:-10px;
+    }
+}
+
+.note-card{
+    background:#ffc;
+    box-shadow: 5px 5px 7px rgba(33,33,33,.7);              /* Opera */     
+    color:#000;
+    display:block;
+    height: auto;
+    max-width: 350px;
+    max-height: 330px;
+    min-height: 150px;
+    min-width: 200px;
+    overflow: hidden;
+    padding:1em;
+    text-decoration:none;
+    width: auto;
+
+    -moz-box-shadow:5px 5px 7px rgba(33,33,33,1);           /* Firefox */
+    -moz-transition:-moz-transform .15s linear;
+    -o-transition:-o-transform .15s linear;
+    -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);      /* Safari+Chrome */
+    -webkit-transition:-webkit-transform .15s linear;   
+}
+
