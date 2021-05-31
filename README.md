@@ -1,3 +1,3 @@
-# Getting Started with Create React App
+# HabitTracker
 
 Proyecto publicado [aquí](https://habit-tracker-ac.herokuapp.com/).
