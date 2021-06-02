@@ -37,7 +37,7 @@ export const ListRow = ({ row, date: id }) => {
         <tr>
             <th scope="row">
                 <button
-                    className="delete"
+                    className="table-button"
                     onClick={handleDelete}
                 >
                     <i className="far fa-trash-alt"></i>
@@ -45,7 +45,7 @@ export const ListRow = ({ row, date: id }) => {
             </th>
             <th scope="row">
                 <button
-                    className="delete"
+                    className="table-button"
                     onClick={handleEdit}
                 >
                     <i className="fas fa-edit"></i>

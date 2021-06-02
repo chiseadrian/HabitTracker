@@ -34,7 +34,7 @@ export const RoutineHabit = (routine) => {
         <tr>
             <th scope="row">
                 <button
-                    className="delete"
+                    className="table-button"
                     onClick={handleDelete}
                 >
                     <i className="far fa-trash-alt"></i>
@@ -42,7 +42,7 @@ export const RoutineHabit = (routine) => {
             </th>
             <th scope="row">
                 <button
-                    className="delete"
+                    className="table-button"
                     onClick={handleEdit}
                 >
                     <i className="fas fa-edit"></i>

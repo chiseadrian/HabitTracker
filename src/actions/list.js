@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 
 import { types } from "../types/types";
 import { fetchConToken } from "../helpers/fetch";
+import { uiCloseModal } from "./ui";
 
 
 export const listStartLoading = () => {
@@ -56,6 +57,8 @@ export const listStartDeleteList = (id) => {
                 (lists.length > 0)
                     ? dispatch(listSetActive(lists[0]))
                     : dispatch(listClearActive())
+
+                dispatch(uiCloseModal());
             } else
                 Swal.fire('Error', body.msg, 'error');
         } catch (error) {

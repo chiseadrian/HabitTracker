@@ -8,9 +8,9 @@ export const RoutineTable = ({ routines }) => {
     const total = calculateTotalRoutines(routines);
 
     return (
-        <table className="table">
+        <table className="table table-striped">
             <thead>
-                <tr>
+                <tr className="table-header">
                     <th scope="col" width="50px"></th>
                     <th scope="col" width="50px"></th>
                     <th scope="col">Name</th>

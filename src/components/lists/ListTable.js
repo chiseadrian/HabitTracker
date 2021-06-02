@@ -1,8 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import Swal from 'sweetalert2';
 
-import { listStartDeleteList } from '../../actions/list';
 import { uiOpenListModal } from '../../actions/ui';
 import { listTableFormat } from '../../helpers/tableFormat';
 import { ListRow } from './ListRow';
@@ -10,52 +8,30 @@ import { ListRow } from './ListRow';
 
 export const ListTable = ({ list }) => {
     const dispatch = useDispatch();
-    const { columns, values, id, name } = list;
+    const { columns, values } = list;
     const { rows, dates } = listTableFormat(values, columns);
-
-    const handleDeleteList = () => {
-        Swal.fire({
-            title: 'Delete List',
-            text: `Are you sure you want to permanently delete "${name}" list?`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed)
-                dispatch(listStartDeleteList(id));
-        })
-    }
 
     const handleEditList = () => {
         dispatch(uiOpenListModal('list-update'))
     }
 
     return (
-        <table className="table">
+        <table className="table table-striped">
             <thead>
-                <tr>
+                <tr className="table-header ">
                     <th scope="row" width="50px">
                         <button
-                            className="delete"
-                            onClick={handleDeleteList}
-                        >
-                            <i className="far fa-trash-alt"></i>
-                        </button>
-                    </th>
-                    <th scope="row" width="50px">
-                        <button
-                            className="delete"
+                            className="table-header-button"
                             onClick={handleEditList}
                         >
-                            <i className="fas fa-edit"></i>
+                            <i className="fas fa-cog"></i>
                         </button>
                     </th>
+                    <th scope="row" width="50px"></th>
                     <th scope="col" width="180px">Date</th>
                     {
                         columns.map((column, i) => (
-                            <th scope="col" key={i}>{column}</th>
+                            <th scope="col" key={i} width={`${75 / columns.length}%`}>{column}</th>
                         ))
                     }
                 </tr>

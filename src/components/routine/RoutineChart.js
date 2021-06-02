@@ -32,7 +32,7 @@ export const RoutineChart = ({ routines }) => {
     return (
         <div className="padding-5">
             {
-                (routines.length > 0) && (
+                (routines.length > 2) && (
                     <Radar
                         data={data}
                         options={options}

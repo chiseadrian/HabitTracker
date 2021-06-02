@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
-import { listStartAddNew, listStartUpdateList } from '../../actions/list';
+import { listStartAddNew, listStartDeleteList, listStartUpdateList } from '../../actions/list';
 import { useForm } from '../../hooks/useForm';
 import { uiCloseModal } from '../../actions/ui';
 
@@ -56,6 +56,21 @@ export const ListNewListFormModal = ({ type }) => {
         }
     }
 
+    const handleDeleteList = () => {
+        Swal.fire({
+            title: 'Delete List',
+            text: `Are you sure you want to permanently delete "${name}" list?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed)
+                dispatch(listStartDeleteList(activeList.id));
+        })
+    }
+
     const handleColumnChange = (e, pos) => {
         columns[pos] = e.target.value;
         setFormValues({ ...formValues, columns });
@@ -71,8 +86,17 @@ export const ListNewListFormModal = ({ type }) => {
 
     return (
         <>
-            <h2 className="ml-1"> {(type === 'update') ? 'Edit' : (type === 'add') && 'Add'} List </h2>
+            <div className="modal-title">
+                <h2 className="ml-1"> {(type === 'update') ? 'Edit' : (type === 'add') && 'Add'} List </h2>
 
+                {
+                    (type === 'update') && (
+                        <button className="delete modal-delete" onClick={handleDeleteList}>
+                            <i className="fas fa-trash-alt"></i>
+                        </button>
+                    )
+                }
+            </div>
             <form
                 className="container"
                 onSubmit={handleSubmitForm}
@@ -112,7 +136,7 @@ export const ListNewListFormModal = ({ type }) => {
                                         className="modal-delete-list-column"
                                         onClick={() => handleDeleteColumn(pos)}
                                     >
-                                        <i className="far fa-trash-alt"></i>
+                                        <i className="fas fa-minus"></i>
                                     </div>
                                 </div>
                             ))

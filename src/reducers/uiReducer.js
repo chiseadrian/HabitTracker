@@ -5,7 +5,7 @@ const initialState = {
     modalRoutineOpen: false,
     modalListOpen: false,
     modalType: '',
-    sidebarOpen: true
+    sidebarOpen: false
 }
 
 export const uiReducer = (state = initialState, action) => {
