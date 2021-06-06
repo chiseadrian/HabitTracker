@@ -1,11 +1,19 @@
 import React from 'react';
 
+import { OpenCloseSidebar } from './OpenCloseSidebar';
+
+
 export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
+
+
     return (
         <div className="main__top-bar">
-            {
-                (handleBack)
-                    ? (
+            <div>
+                <OpenCloseSidebar />
+
+                {
+                    (handleBack)
+                    && (
                         <button
                             className="btn-default"
                             onClick={handleBack}
@@ -14,20 +22,16 @@ export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
 
                         </button>
                     )
-                    : (
-                        <button disabled className="btn-default"></button>
-                    )
-            }
+                }
+            </div>
 
-            {title}
+            <div className="top-bar-title"> {title} </div>
 
             {
                 (handleForward)
                     ? (
                         (last)
-                            ? (
-                                <button disabled className="btn-default"></button>
-                            )
+                            ? <button disabled className="btn-default"></button>
                             : (
                                 <button
                                     className="btn-default"
@@ -37,9 +41,7 @@ export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
                                 </button>
                             )
                     )
-                    : (
-                        <button disabled className="btn-default"></button>
-                    )
+                    : <button disabled className="btn-default"></button>
             }
         </div>
     )

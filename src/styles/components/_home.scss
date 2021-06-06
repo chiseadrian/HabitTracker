@@ -1,9 +1,9 @@
 .home__main-content{
     align-items: center;
     background-color: #232323;
-    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     color: white;
     height: 100%;
     width: 100%;
@@ -16,17 +16,22 @@
 .centered{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 89%;
+    justify-content: flex-end;
+    height: 45vh;
 }
 
 .centered-bottom{
+    display: flex;
+    flex-direction: column;
+    height: 45vh;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding-bottom: 3%;
     text-align: center;
-    height: 10%;
 }
 
 .home-time{
-    font-size: 1050%;
+    font-size: 15vh;
     letter-spacing: -5px;
     text-shadow: 2px 8px 6px rgba(0,0,0,0.2), 0px -5px 35px rgba(255,255,255,0.3);
 }

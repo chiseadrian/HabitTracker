@@ -27,6 +27,7 @@
         box-shadow:10px 10px 7px rgba(0,0,0,.7);
         position:relative;
         z-index:5;
+        
         -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7);
         -moz-transform: scale(1.25);
         -o-transform: scale(1.25);
@@ -66,8 +67,8 @@
     color:#000;
     display:block;
     height: auto;
-    max-width: 350px;
     max-height: 330px;
+    max-width: 350px;
     min-height: 150px;
     min-width: 200px;
     overflow: hidden;
@@ -82,3 +83,9 @@
     -webkit-transition:-webkit-transform .15s linear;   
 }
 
+@media (max-width: 768px) { 
+    .note-card{
+        max-height: 200px;
+        max-width: 150px;
+    }
+}

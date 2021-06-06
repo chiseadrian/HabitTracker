@@ -25,7 +25,7 @@ export const MonthScreen = () => {
 
 
     return (
-        <div className="fill-parent main__content">
+        <div className="fill-parent">
             <MainTopBar
                 handleBack={() => setCurentDate(date.add(-1, 'month').toDate())}
                 handleForward={() => setCurentDate(date.add(1, 'month').toDate())}

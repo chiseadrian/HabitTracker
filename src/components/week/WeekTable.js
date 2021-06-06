@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
 
 import { WeekHabit } from './WeekHabit';
 import { timeToTableFormat } from '../../helpers/timeFormat';
-import { dateWeek } from '../../helpers/dateFormat';
 import { calculateTotal } from '../../helpers/calculateTotal';
 import { dayStartLoading } from '../../actions/task';
-import { MainTopBar } from '../ui/MainTopBar';
 
 
 let weekChanged = false;
 
-export const WeekTable = ({ days, routines, tableRows }) => {
+export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays }) => {
     const dispatch = useDispatch();
-    const [currentDate, setCurentDate] = useState(new Date());
     const { changes } = useSelector(state => state.week);
-
-    const { monday, sunday, weekDays } = dateWeek(currentDate);
     const totals = calculateTotal(days, routines);
-    const date = moment(currentDate);
-
 
     useEffect(() => {
         dispatch(dayStartLoading('week', currentDate));
@@ -29,14 +21,7 @@ export const WeekTable = ({ days, routines, tableRows }) => {
 
 
     return (
-        <>
-            <MainTopBar
-                handleBack={() => setCurentDate(date.add(-7, 'days').toDate())}
-                handleForward={() => setCurentDate(date.add(7, 'days').toDate())}
-                title={`${monday.format('DD MMMM')} - ${sunday.format('DD MMMM YYYY')}`}
-                last={(sunday.add(1, 'days').toDate().getTime() >= new Date().getTime())}
-            />
-
+        <div className="scroll-x">
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -85,7 +70,6 @@ export const WeekTable = ({ days, routines, tableRows }) => {
                 </tbody>
                 {weekChanged = false}
             </table>
-        </>
-
+        </div>
     )
 }

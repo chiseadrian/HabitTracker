@@ -27,8 +27,13 @@ export const WeekChart = ({ days }) => {
             }
         ]
     }
+
     const options = {
         maintainAspectRatio: false,
+        parsing: {
+            xAxisKey: 'id',
+            yAxisKey: 'nested.value'
+        }
     }
 
     return (

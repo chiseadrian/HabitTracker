@@ -55,10 +55,12 @@ main {
 .contenedor{
     width: calc(100vw - 250px);
     height: 100vh;
+    overflow-y: scroll;
 }
 .contenedor-sidebar-closed{
-    width: calc(100vw - 80px);
+    width: 100vw;// width: calc(100vw - 80px);
     height: 100vh;
+    overflow-y: scroll;
 }
 
 .full-screen{
@@ -81,10 +83,6 @@ main {
 
 .primary_color{
     color: $primary !important
-}
-
-.main__content{
-    overflow-y: scroll;
 }
 
 .main__top-bar{
@@ -110,6 +108,10 @@ main {
     }
 }
 
+.scroll-x{
+    overflow-x: auto;
+}
+
 .align-center{
     text-align: center;
 }
@@ -130,4 +132,25 @@ main {
     }
 }
 
+/* Top Bar */
+.main__top-bar{
+    background-color: black;
+    color: white;
+    display: flex;
+    font-size: 1.75rem;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;
+    height: 65px;
+}
+.top-bar-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+@media (max-width: 768px) {
+    .main__top-bar{
+        font-size: 1.2rem;
+    }
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
-import { uiCloseSidebar, uiOpenSidebar } from '../../actions/ui';
 
 
 export const Sidebar = () => {
@@ -10,11 +9,7 @@ export const Sidebar = () => {
     const { sidebarOpen } = useSelector(state => state.ui);
     const { name } = useSelector(state => state.auth);
 
-    const handleHideSidebar = () => {
-        (sidebarOpen) ? dispatch(uiCloseSidebar()) : dispatch(uiOpenSidebar());
-    }
-
-    const handleLogout = (e) => {
+    const handleLogout = () => {
         dispatch(startLogout());
     }
 
@@ -33,7 +28,7 @@ export const Sidebar = () => {
     return (
         <nav id="sidebar" className={!sidebarOpen ? 'active' : ''}>
             <ul className="list-unstyled components">
-                <li className="active mt-1 sidebar-top-title">
+                <li className="active sidebar-top-title">
                     {
                         (sidebarOpen) && (
                             <div>
@@ -41,11 +36,8 @@ export const Sidebar = () => {
                             </div>
                         )
                     }
-                    <button className="btn shadow-none" onClick={handleHideSidebar}>
-                        <i className={(sidebarOpen) ? "fas fa-times" : "fas fa-bars"}></i>
-                    </button>
                 </li>
-                <li className="sidebar-item mt-1" title={name}>
+                <li className="sidebar-item" title={name}>
                     <Link
                         className="nav-item nav-link"
                         to="/"
@@ -54,18 +46,18 @@ export const Sidebar = () => {
                         {(sidebarOpen) && name}
                     </Link>
                 </li>
-                <li className="sidebar-item mt-1" title="Routine">
+                <li className="sidebar-item" title="Routine" >
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
                         exact
                         to="/routine"
                     >
-                        <i className="fas fa-calendar-day mr-5"></i>
+                        <i className="fas fa-calendar-day mr-5 tour-step-1"></i>
                         {(sidebarOpen) && 'Routine'}
                     </NavLink>
                 </li>
-                <li className="sidebar-item mt-1" title="Week">
+                <li className="sidebar-item" title="Week">
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
@@ -76,18 +68,18 @@ export const Sidebar = () => {
                         {(sidebarOpen) && 'Week'}
                     </NavLink>
                 </li>
-                <li className="sidebar-item mt-1" title="Month">
+                <li className="sidebar-item" title="Month">
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
                         exact
                         to="/month"
                     >
-                        <i className="far fa-calendar-alt mr-5"></i>
+                        <i className="far fa-calendar-alt mr-5 tour-step-3"></i>
                         {(sidebarOpen) && 'Month'}
                     </NavLink>
                 </li>
-                <li className="sidebar-item mt-1" title="Notes">
+                <li className="sidebar-item" title="Notes">
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
@@ -98,7 +90,7 @@ export const Sidebar = () => {
                         {(sidebarOpen) && 'Notes'}
                     </NavLink>
                 </li>
-                <li className="sidebar-item mt-1" title="Lists">
+                <li className="sidebar-item" title="Lists">
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
@@ -109,7 +101,7 @@ export const Sidebar = () => {
                         {(sidebarOpen) && 'Lists'}
                     </NavLink>
                 </li>
-                <li className="sidebar-item mt-1" title="Timer">
+                <li className="sidebar-item" title="Timer">
                     <NavLink
                         activeClassName="current"
                         className="nav-item nav-link"
@@ -120,7 +112,7 @@ export const Sidebar = () => {
                         {(sidebarOpen) && 'Timer'}
                     </NavLink>
                 </li>
-            </ul>
+            </ul >
 
             <button
                 className="logout"
@@ -129,6 +121,6 @@ export const Sidebar = () => {
                 <i className="fas fa-sign-out-alt"></i>
                 {(sidebarOpen) && 'Logout'}
             </button>
-        </nav>
+        </nav >
     )
 }

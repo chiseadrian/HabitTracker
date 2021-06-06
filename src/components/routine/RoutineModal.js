@@ -20,6 +20,7 @@ const customStyles = {
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         height: 'auto',
+        maxHeight: 'fit-content',
         paddingBottom: '20px'
     }
 };
@@ -98,7 +99,7 @@ export const RoutineModal = () => {
                 className="container"
                 onSubmit={handleSubmitForm}
             >
-                <div className="form-group row">
+                <div className="form-group row space-between">
                     <label className="col-sm-3 col-form-label"> Name: </label>
                     <div className="col-sm-9">
                         <input
@@ -112,9 +113,8 @@ export const RoutineModal = () => {
                         />
                     </div>
                 </div>
-                <br />
 
-                <div className="form-group row">
+                <div className="form-group row space-between">
                     <label className="col-sm-3 col-form-label"> Frecuency: </label>
                     <div className="col-sm-9">
                         <select
@@ -133,9 +133,8 @@ export const RoutineModal = () => {
                         </select>
                     </div>
                 </div>
-                <br />
 
-                <div className="form-group row">
+                <div className="form-group row space-between">
                     <label className="col-sm-3 col-form-label"> Goal: </label>
                     <div className="col-sm-9">
                         <input
@@ -149,8 +148,8 @@ export const RoutineModal = () => {
                         />
                     </div>
                 </div>
-                <br />
 
+                <br />
                 <button
                     type="submit"
                     className="modal-save"

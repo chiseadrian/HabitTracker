@@ -68,26 +68,23 @@ export const ListNewRowFormModal = ({ type }) => {
                 <br />
                 {
                     columns.map((col, i) =>
-                        <div key={i}>
-                            <div className="form-group row" >
-                                <label className="col-sm-3 col-form-label"> {col}: </label>
-                                <div className="col-sm-9">
-                                    <input
-                                        type="text"
-                                        className={`form-control ${(formValues[col] === "") ? 'modal-border-error' : 'modal-border'}`}
-                                        placeholder="..."
-                                        autoComplete="off"
-                                        name={col}
-                                        value={formValues[col]}
-                                        onChange={handleInputChange}
-                                    />
-                                </div>
+                        <div className="form-group row space-between" key={i}>
+                            <label className="col-sm-3 col-form-label"> {col}: </label>
+                            <div className="col-sm-9">
+                                <input
+                                    type="text"
+                                    className={`form-control ${(formValues[col] === "") ? 'modal-border-error' : 'modal-border'}`}
+                                    placeholder="..."
+                                    autoComplete="off"
+                                    name={col}
+                                    value={formValues[col]}
+                                    onChange={handleInputChange}
+                                />
                             </div>
-                            <br />
                         </div>
                     )
                 }
-
+                <br />
                 <button
                     type="submit"
                     className="modal-save"

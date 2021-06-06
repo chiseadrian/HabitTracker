@@ -8,7 +8,6 @@ import { NoteModal } from './NoteModal';
 import { MainTopBar } from '../ui/MainTopBar';
 import { uiOpenNoteModal } from '../../actions/ui';
 
-
 export const NotesScreen = () => {
     const dispatch = useDispatch();
     const { notes } = useSelector(state => state.note)
@@ -22,9 +21,8 @@ export const NotesScreen = () => {
         dispatch(uiOpenNoteModal());
     }
 
-
     return (
-        <div className="fill-parent main__content">
+        <div className="fill-parent">
             <MainTopBar title={'Notes'} />
             {
                 (notes.length === 0) && (

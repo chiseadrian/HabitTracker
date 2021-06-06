@@ -19,7 +19,7 @@ export const RoutineScreen = () => {
 
 
     return (
-        <div className="fill-parent main__content">
+        <div className="fill-parent">
             <MainTopBar title={'Daily Routine'} />
             <RoutineTable routines={routines} />
 

@@ -23,7 +23,7 @@ export const ListsScreen = () => {
     }
 
     return (
-        <div className="fill-parent main__content align-center">
+        <div className="fill-parent align-center">
             <MainTopBar title={'Lists'} />
 
             <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
