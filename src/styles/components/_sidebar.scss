@@ -2,8 +2,12 @@
     background-color: $primary;
     box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
     color: white;
+    display: flex;
+    flex-direction: column;
     height: 100vh;
+    justify-content: space-between;
     min-width: 250px;
+    overflow-y: auto;
     position: relative;
     width: 250px;
 

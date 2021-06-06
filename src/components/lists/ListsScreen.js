@@ -26,38 +26,40 @@ export const ListsScreen = () => {
         <div className="fill-parent align-center">
             <MainTopBar title={'Lists'} />
 
-            <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
-                <li className="nav-item">
-                    <button
-                        className="list-add"
-                        onClick={handleAddList}
-                    >
-                        <i className="fas fa-plus"></i>
-                    </button>
-                </li>
+            <div className="content-scroll-y">
+                <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
+                    <li className="nav-item">
+                        <button
+                            className="list-add"
+                            onClick={handleAddList}
+                        >
+                            <i className="fas fa-plus"></i>
+                        </button>
+                    </li>
+
+                    {
+                        lists.map((list) => (
+                            <ListTab
+                                key={list.id}
+                                {...list}
+                            />
+                        ))
+                    }
+                </ul>
 
                 {
-                    lists.map((list) => (
-                        <ListTab
-                            key={list.id}
-                            {...list}
-                        />
-                    ))
+                    (activeList)
+                        ? <ListTable list={activeList} />
+                        : <div className="pointer-message" onClick={handleAddList}>Add list</div>
                 }
-            </ul>
 
-            {
-                (activeList)
-                    ? <ListTable list={activeList} />
-                    : <div className="pointer-message" onClick={handleAddList}>Add list</div>
-            }
-
-            <ListModal />
-            {
-                (lists.length > 0) && (
-                    <AddNewFab type='list-row' />
-                )
-            }
+                <ListModal />
+                {
+                    (lists.length > 0) && (
+                        <AddNewFab type='list-row' />
+                    )
+                }
+            </div>
         </div>
     )
 }

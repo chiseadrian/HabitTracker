@@ -29,19 +29,22 @@ export const WeekScreen = () => {
                 title={`${monday.format('DD MMMM')} - ${sunday.format('DD MMMM YYYY')}`}
                 last={(sunday.add(1, 'days').toDate().getTime() >= new Date().getTime())}
             />
-            <WeekTable
-                days={days}
-                routines={routines}
-                tableRows={tableRows}
-                currentDate={currentDate}
-                weekDays={weekDays}
-            />
 
-            <WeekChart days={getDaysDoneToChart(tableRows)} />
+            <div className="content-scroll-y">
+                <WeekTable
+                    days={days}
+                    routines={routines}
+                    tableRows={tableRows}
+                    currentDate={currentDate}
+                    weekDays={weekDays}
+                />
 
-            {
-                (changes.length > 0) && <AddNewFab type="guardar" />
-            }
+                <WeekChart days={getDaysDoneToChart(tableRows)} />
+
+                {
+                    (changes.length > 0) && <AddNewFab type="guardar" />
+                }
+            </div>
         </div>
     )
 }

@@ -53,7 +53,7 @@ export const LoginScreen = () => {
             <div className="row">
                 <div className="col-md-1"></div>
                 <div className="col-md-5 login-form">
-                    <h3>Login</h3>
+                    <h3 style={{ margin: '25px 0 25px 0' }}>Login</h3>
                     <form onSubmit={handleLogin} >
                         <fieldset disabled={loading}>
                             <div className="form-group">
@@ -90,7 +90,7 @@ export const LoginScreen = () => {
                 </div>
 
                 <div className="col-md-5 register-form">
-                    <h3>Create Account</h3>
+                    <h3 style={{ margin: '25px 0 25px 0' }}>Create Account</h3>
                     <form onSubmit={handleRegister}>
                         <fieldset disabled={loading}>
                             <div className="form-group">

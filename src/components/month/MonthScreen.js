@@ -33,20 +33,22 @@ export const MonthScreen = () => {
                 last={(last.toDate().getTime() >= new Date().getTime())}
             />
 
-            < MonthChart
-                days={days}
-                routines={routines}
-            />
+            <div className="content-scroll-y">
+                < MonthChart
+                    days={days}
+                    routines={routines}
+                />
 
-            {
-                (days.length > 0) && (
-                    <MonthTable
-                        days={days}
-                        routines={routines}
-                        last={last}
-                    />
-                )
-            }
+                {
+                    (days.length > 0) && (
+                        <MonthTable
+                            days={days}
+                            routines={routines}
+                            last={last}
+                        />
+                    )
+                }
+            </div>
         </div >
     )
 }

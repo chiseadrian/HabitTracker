@@ -52,26 +52,28 @@ export const TimerScreen = () => {
         <div className="fill-parent align-center" style={{ background: '#212529' }}>
             <MainTopBar title={'Timer'} />
 
-            <div className="timer">
-                <div className="minutes">{hours}:{minutes}:{seconds},</div>
-                <div className="milliseconds">{milliseconds}</div>
-            </div>
+            <div className="content-scroll-y">
+                <div className="timer">
+                    <div className="minutes">{hours}:{minutes}:{seconds},</div>
+                    <div className="milliseconds">{milliseconds}</div>
+                </div>
 
 
-            <button className="start-timer" onClick={handleStartPause} title="Play/Pause">
-                {
-                    (play)
-                        ? <i className="fas fa-pause"></i>
-                        : <i className="fas fa-play"></i>
-                }
-            </button>
-            {/* <button className="button-timer" onClick={handleFlagTime} title="Flag Time" disabled={!play}>
+                <button className="start-timer" onClick={handleStartPause} title="Play/Pause">
+                    {
+                        (play)
+                            ? <i className="fas fa-pause"></i>
+                            : <i className="fas fa-play"></i>
+                    }
+                </button>
+                {/* <button className="button-timer" onClick={handleFlagTime} title="Flag Time" disabled={!play}>
                 <i className="fas fa-flag"></i>
             </button> */}
-            <button className="button-timer" onClick={handleRestart} title="Restart" disabled={play}>
-                <i className="fas fa-undo"></i>
-            </button>
+                <button className="button-timer" onClick={handleRestart} title="Restart" disabled={play}>
+                    <i className="fas fa-undo"></i>
+                </button>
 
+            </div>
         </div>
     )
 }

@@ -21,12 +21,14 @@ export const RoutineScreen = () => {
     return (
         <div className="fill-parent">
             <MainTopBar title={'Daily Routine'} />
-            <RoutineTable routines={routines} />
 
-            <RoutineChart routines={routines} />
+            <div className="content-scroll-y">
+                <RoutineTable routines={routines} />
+                <RoutineChart routines={routines} />
 
-            <AddNewFab type="routine" />
-            <RoutineModal />
+                <AddNewFab type="routine" />
+                <RoutineModal />
+            </div>
         </div>
     )
 }

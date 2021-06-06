@@ -24,27 +24,30 @@ export const NotesScreen = () => {
     return (
         <div className="fill-parent">
             <MainTopBar title={'Notes'} />
-            {
-                (notes.length === 0) && (
-                    <div className="pointer-message" onClick={handleAddNote}>Add note</div>
-                )
-            }
-            <ul className="notes">
+
+            <div className="content-scroll-y">
                 {
-                    notes.map((note) => {
-                        return (
-                            <Note
-                                key={note.id}
-                                {...note}
-                            />
-                        )
-                    })
+                    (notes.length === 0) && (
+                        <div className="pointer-message" onClick={handleAddNote}>Add note</div>
+                    )
                 }
-            </ul>
+                <ul className="notes">
+                    {
+                        notes.map((note) => {
+                            return (
+                                <Note
+                                    key={note.id}
+                                    {...note}
+                                />
+                            )
+                        })
+                    }
+                </ul>
 
-            <AddNewFab type="note" />
+                <AddNewFab type="note" />
 
-            <NoteModal />
+                <NoteModal />
+            </div>
         </div>
     )
 }

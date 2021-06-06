@@ -29,9 +29,9 @@
     border-radius: 8px;
     bottom: 0;
     color: $primary;
-    height: 5%;
-    left: 0;
-    position: absolute;
+    height: 45px;
+    // left: 0;
+    // position: absolute;
     width: 100%;
 
     &:hover{
@@ -147,9 +147,5 @@
     .fab-guardar{
         font-size: x-large;
         width: 150px;
-    }
-
-    .logout{
-        height: auto;
     }
 }
