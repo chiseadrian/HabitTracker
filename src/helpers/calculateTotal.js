@@ -43,10 +43,11 @@ export const calculateTotalMonth = (days, routines, numDaysMonth) => {
         const weekGoal = goal * frecuency;
         const restDaysMonth = (numDaysMonth - 28);
 
-        monthGoal[id] = weekGoal * 4 + (restDaysMonth * 100 / 7 / 100 * weekGoal);
+        monthGoal[id] = Math.trunc(weekGoal * 4 + (restDaysMonth * 100 / 7 / 100 * weekGoal));
         monthDone[id] = 0;
         routineNames[id] = name;
     });
+    // console.log(monthGoal)
 
     days.forEach(({ values }) => {
         for (let rid in values) {
@@ -55,7 +56,7 @@ export const calculateTotalMonth = (days, routines, numDaysMonth) => {
     });
 
     for (let rid in monthDone) {
-        const done = monthDone[rid];
+        const done = Math.trunc(monthDone[rid]);
         data.push({
             average: timeToTableFormat(Math.round(done / numDaysMonth)),
             completed: Math.trunc(done * 100 / monthGoal[rid]),

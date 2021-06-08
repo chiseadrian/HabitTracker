@@ -28,23 +28,25 @@ export const ListsScreen = () => {
 
             <div className="content-scroll-y">
                 <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
-                    <li className="nav-item">
-                        <button
-                            className="list-add"
-                            onClick={handleAddList}
-                        >
-                            <i className="fas fa-plus"></i>
-                        </button>
-                    </li>
+                    <div className="list-tab-scroll">
+                        <li className="nav-item">
+                            <button
+                                className="list-add"
+                                onClick={handleAddList}
+                            >
+                                <i className="fas fa-plus"></i>
+                            </button>
+                        </li>
 
-                    {
-                        lists.map((list) => (
-                            <ListTab
-                                key={list.id}
-                                {...list}
-                            />
-                        ))
-                    }
+                        {
+                            lists.map((list) => (
+                                <ListTab
+                                    key={list.id}
+                                    {...list}
+                                />
+                            ))
+                        }
+                    </div>
                 </ul>
 
                 {

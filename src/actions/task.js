@@ -122,11 +122,6 @@ export const taskStartSave = () => {
 //     }
 // }
 
-
-
-
-
-
 export const taskClear = (task) => ({
     type: types.taskClear
 })

@@ -5,7 +5,7 @@ import { uiCloseModal } from "./ui";
 
 
 export const noteStartLoading = () => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         try {
             const resp = await fetchConToken(`notes`);
             const body = await resp.json();

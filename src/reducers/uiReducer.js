@@ -5,7 +5,8 @@ const initialState = {
     modalRoutineOpen: false,
     modalListOpen: false,
     modalType: '',
-    sidebarOpen: false
+    sidebarOpen: false,
+    backgroundImage: ''
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -44,6 +45,11 @@ export const uiReducer = (state = initialState, action) => {
                 ...state,
                 sidebarOpen: false
             };
+        case types.uiSetBackgroundImage:
+            return {
+                ...state,
+                backgroundImage: action.payload
+            }
 
         default:
             return state;

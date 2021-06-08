@@ -6,6 +6,7 @@ export const types = {
     uiOpenSidebar: '[ui] Open sidebar',
     uiCloseSidebar: '[ui] Close sidebar',
     uiSetError: '[ui] Set Error',
+    uiSetBackgroundImage: '[ui] Set background image',
 
     noteSetActive: '[note] Set Active',
     noteClearActive: '[note] Clear Active',

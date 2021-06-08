@@ -7,6 +7,8 @@ import { LoginScreen } from '../components/auth/LoginScreen';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { DashboardRoutes } from './DashboardRoutes';
+import { getBackgroundImage } from '../actions/ui';
+
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
@@ -14,6 +16,7 @@ export const AppRouter = () => {
 
     useEffect(() => {
         dispatch(startCheckin());
+        dispatch(getBackgroundImage());
     }, [dispatch]);
 
     if (checking) {

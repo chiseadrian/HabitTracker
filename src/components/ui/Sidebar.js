@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
+import { uiCloseSidebar } from '../../actions/ui';
 
 
 export const Sidebar = () => {
@@ -25,9 +26,15 @@ export const Sidebar = () => {
         'fas fa-poo',
     ]
 
+    const handleCloseSidebarSmallScreen = () => {
+        if (sidebarOpen && window.innerWidth < 768) {
+            dispatch(uiCloseSidebar());
+        }
+    }
+
     return (
         <nav id="sidebar" className={!sidebarOpen ? 'active' : ''}>
-            <ul className="list-unstyled components">
+            <ul className="list-unstyled components" onClick={handleCloseSidebarSmallScreen}>
                 <li className="active sidebar-top-title">
                     {
                         (sidebarOpen) && (

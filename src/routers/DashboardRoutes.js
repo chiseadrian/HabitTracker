@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
 
 import { Sidebar } from '../components/ui/Sidebar';
-import { Home } from '../components/Home';
+import { Home } from '../components/home/Home';
 import { NotesScreen } from '../components/notes/NotesScreen';
 import { RoutineScreen } from '../components/routine/RoutineScreen';
 import { WeekScreen } from '../components/week/WeekScreen';
