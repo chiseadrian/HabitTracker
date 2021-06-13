@@ -10,12 +10,7 @@ export const GoogleLoginButton = () => {
 
     const responseGoogle = (response) => {
         try {
-            dispatch(startGoogleLogin(
-                response.profileObj.email,
-                response.profileObj.givenName,
-                response.tokenObj.access_token,
-                'google'
-            ));
+            dispatch(startGoogleLogin(response.tokenId));
         } catch (error) {
             console.log(error)
         }
@@ -23,7 +18,7 @@ export const GoogleLoginButton = () => {
 
     return (
         <GoogleLogin
-            clientId="1097290771375-c4khkbo5keq9eurkqo37sohsj6rgfift.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_REACT_APP_GOOGLE_CLIENT_ID}
             buttonText="Login"
             onSuccess={responseGoogle}
             onFailure={responseGoogle}

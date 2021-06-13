@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 import { startLogin, startRegister } from '../../actions/auth';
 import { useForm } from '../../hooks/useForm';
-// import { GoogleLoginButton } from './GoogleLoginButton';
+import { GoogleLoginButton } from './GoogleLoginButton';
 
 export const LoginScreen = () => {
     const dispatch = useDispatch();
@@ -86,7 +86,7 @@ export const LoginScreen = () => {
                         </fieldset>
                     </form>
 
-                    {/* <GoogleLoginButton /> */}
+                    <GoogleLoginButton />
                 </div>
 
                 <div className="col-md-5 register-form">
