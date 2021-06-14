@@ -2,14 +2,13 @@ import Swal from "sweetalert2";
 
 import { giveStartEndPeriod } from "../helpers/dateFormat";
 import { fetchConToken } from "../helpers/fetch";
-import { checkIsInChanges } from "../helpers/inputTimeChanges";
 import { timeToMinutes } from "../helpers/timeFormat";
 import { types } from "../types/types";
 import { routineStartLoading } from "./routine";
 
 
 export const dayStartLoading = (period, date) => {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const { start, end } = giveStartEndPeriod(period, date);
 
         try {
@@ -22,17 +21,6 @@ export const dayStartLoading = (period, date) => {
         } catch (error) {
             console.log(error);
         }
-    }
-}
-
-export const taskStartUpdateChange = (changeDay, change) => {
-    return (dispatch, getState) => {
-        const changes = getState().week.changes;
-        const inChanges = checkIsInChanges(changes, change.numDay);
-
-        (!inChanges)
-            ? dispatch(taskAddNewChange(changeDay))
-            : dispatch(taskUpdateChange(change));
     }
 }
 
@@ -58,7 +46,6 @@ export const taskStartSave = () => {
         }
     }
 }
-
 
 const calculateDone = ({ values }) => {
     let newDone = 0;
@@ -99,14 +86,12 @@ const updateChange = async (dispatch, change) => {
     }
 }
 
-export const taskAddNewChange = (task) => ({ type: types.taskAddNewChange, payload: task });
 export const taskAddNewDay = (day) => ({ type: types.taskAddNewDay, payload: day });
+export const taskUpdateChange = (task) => ({ type: types.taskUpdateChange, payload: task });
 export const taskClear = () => ({ type: types.taskClear });
 export const taskClearChanges = () => ({ type: types.taskClearChanges });
 export const taskLoaded = (days) => ({ type: types.taskLoaded, payload: days });
 export const taskUpdate = (task) => ({ type: types.taskUpdate, payload: task });
-export const taskUpdateChange = (task) => ({ type: types.taskUpdateChange, payload: task });
-export const taskUpdateChangeOnTasks = (toChange) => ({ type: types.taskUpdateChangeOnTasks, payload: toChange });
 
 
 

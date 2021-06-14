@@ -29,9 +29,7 @@ export const types = {
     taskClear: '[task] Clear tasks',
     taskClearChanges: '[task] Clear Changes',
     taskAddChange: '[task] Add Change',
-    taskUpdateChangeOnTasks: '[task] Update change on Tasks',
     taskUpdateChange: '[task] Update Change',
-    taskAddNewChange: '[task]Add new Change',
     taskAddNewDay: '[task] Add new Day',
 
     listLoaded: '[list] Loaded lists',

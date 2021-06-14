@@ -16,11 +16,11 @@ export const inChanges = (changes, id, numDay, numMonth, numYear) => {  //deveue
     return changed;
 }
 
-export const checkIsInChanges = (changes, day) => {
+export const checkIsInChanges = (changes, date) => {
     let inChanges = false;
 
     changes.forEach(change => {
-        if (change.numDay === day) {
+        if (change.date === date) {
             inChanges = true;
         }
     });
