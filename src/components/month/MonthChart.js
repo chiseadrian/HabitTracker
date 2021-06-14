@@ -3,9 +3,9 @@ import { Line } from 'react-chartjs-2';
 
 import { createMonthDatasets, getDaysMonthToChart } from '../../helpers/dataToChart';
 
+
 export const MonthChart = ({ days, routines }) => {
     const { names, rdata } = getDaysMonthToChart(days, routines);
-
     const data = {
         labels: names,
         datasets: createMonthDatasets(routines, rdata)
@@ -27,11 +27,8 @@ export const MonthChart = ({ days, routines }) => {
                             width={600}
                         />
                     )
-                    : (
-                        <div style={{ textAlign: 'center', fontWeight: 'bold' }}>No data available</div>
-                    )
+                    : <div style={{ textAlign: 'center', fontWeight: 'bold' }}>No data available</div>
             }
-
         </div>
     )
 }

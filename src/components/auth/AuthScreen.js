@@ -5,8 +5,7 @@ import { RegisterForm } from './RegisterForm';
 import { GoogleLoginButton } from './GoogleLoginButton';
 
 
-export const LoginScreen = () => {
-
+export const AuthScreen = () => {
     return (
         <div className="login-container fill-parent">
             <div className="row">

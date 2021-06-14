@@ -20,14 +20,6 @@ export const ListNewRowFormModal = ({ type }) => {
     const [dateTime, onChangeDateTime] = useState(new Date());
 
 
-    useEffect(() => {
-        if (type === 'update') {
-            setFormValues({ ...formValues, ...activeList.values[activeRow.id] });
-            onChangeDateTime(new Date(parseInt(activeRow.id)));
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const handleSubmitForm = (e) => {
         e.preventDefault();
         if (!dateTime)
@@ -49,6 +41,14 @@ export const ListNewRowFormModal = ({ type }) => {
         dispatch(uiCloseModal());
         setFormValues(initState);
     }
+
+    useEffect(() => {
+        if (type === 'update') {
+            setFormValues({ ...formValues, ...activeList.values[activeRow.id] });
+            onChangeDateTime(new Date(parseInt(activeRow.id)));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>

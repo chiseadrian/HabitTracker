@@ -3,28 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { startCheckin } from '../actions/auth';
-import { LoginScreen } from '../components/auth/LoginScreen';
+import { AuthScreen } from '../components/auth/AuthScreen';
 import { PublicRoute } from './PublicRoute';
 import { PrivateRoute } from './PrivateRoute';
 import { DashboardRoutes } from './DashboardRoutes';
 import { getBackgroundImage } from '../actions/ui';
+import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
     const { checking, uid } = useSelector(state => state.auth)
 
+
     useEffect(() => {
         dispatch(startCheckin());
         dispatch(getBackgroundImage());
     }, [dispatch]);
 
-    if (checking) {
-        return (<div className="spinner-content">
-            <div className="lds-ripple"><div></div><div></div></div>
-            Loading...
-        </div >);
-    }
+
+    if (checking)
+        return <LoadingSpinner />;
 
     return (
         <Router>
@@ -33,7 +32,7 @@ export const AppRouter = () => {
                     <PublicRoute
                         exact
                         path="/login"
-                        component={LoginScreen}
+                        component={AuthScreen}
                         isAuthenticated={!!uid} // !! devuelve falso si uid=null y true si uid es correcto
                     />
                     <PrivateRoute

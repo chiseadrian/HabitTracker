@@ -4,22 +4,15 @@ import { OpenCloseSidebar } from './OpenCloseSidebar';
 
 
 export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
-
-
     return (
         <div className="main__top-bar">
             <div>
                 <OpenCloseSidebar />
 
                 {
-                    (handleBack)
-                    && (
-                        <button
-                            className="btn-default"
-                            onClick={handleBack}
-                        >
+                    (handleBack) && (
+                        <button className="btn-default" onClick={handleBack} >
                             <i className="fas fa-chevron-left"></i>
-
                         </button>
                     )
                 }

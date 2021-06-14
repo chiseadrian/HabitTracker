@@ -19,15 +19,22 @@ export const WeekScreen = () => {
 
     const tableRows = weekTableFormat(days, routines);
     const { monday, sunday, weekDays } = dateWeek(currentDate);
-    const date = moment(currentDate);
+    const topBar = {
+        title: `${monday.format('DD MMMM')} - ${sunday.format('DD MMMM YYYY')}`,
+        last: (sunday.add(1, 'days').toDate().getTime() >= new Date().getTime())
+    }
+
+    const switchWeek = (num) => {
+        setCurentDate(moment(currentDate).add(num, 'days').toDate());
+    }
 
     return (
         <div className="fill-parent">
             <MainTopBar
-                handleBack={() => setCurentDate(date.add(-7, 'days').toDate())}
-                handleForward={() => setCurentDate(date.add(7, 'days').toDate())}
-                title={`${monday.format('DD MMMM')} - ${sunday.format('DD MMMM YYYY')}`}
-                last={(sunday.add(1, 'days').toDate().getTime() >= new Date().getTime())}
+                handleBack={() => switchWeek(-7)}
+                handleForward={() => switchWeek(7)}
+                title={topBar.title}
+                last={topBar.last}
             />
 
             <div className="content-scroll-y">

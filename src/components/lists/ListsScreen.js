@@ -14,13 +14,15 @@ export const ListsScreen = () => {
     const dispatch = useDispatch();
     const { lists, activeList } = useSelector(state => state.list)
 
-    useEffect(() => {
-        dispatch(listStartLoading());
-    }, [dispatch]);
 
     const handleAddList = () => {
         dispatch(uiOpenListModal('list'));
     }
+
+    useEffect(() => {
+        dispatch(listStartLoading());
+    }, [dispatch]);
+
 
     return (
         <div className="fill-parent align-center">
@@ -52,14 +54,13 @@ export const ListsScreen = () => {
                 {
                     (activeList)
                         ? <ListTable list={activeList} />
-                        : <div className="pointer-message" onClick={handleAddList}>Add list</div>
+                        : <div className="pointer-message" onClick={handleAddList}> Add list </div>
                 }
 
                 <ListModal />
+
                 {
-                    (lists.length > 0) && (
-                        <AddNewFab type='list-row' />
-                    )
+                    (lists.length > 0) && <AddNewFab type='list-row' />
                 }
             </div>
         </div>

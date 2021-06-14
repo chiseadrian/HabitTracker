@@ -16,21 +16,27 @@ export const MonthScreen = () => {
     const [currentDate, setCurentDate] = useState(new Date());
 
     const { last } = dateMonth(currentDate);
-    const date = moment(currentDate);
+    const topBar = {
+        title: `${last.format('MMMM')}`,
+        last: (last.toDate().getTime() >= new Date().getTime())
+    }
+
+    const switchMonth = (num) => {
+        setCurentDate(moment(currentDate).add(num, 'month').toDate());
+    }
+
 
     useEffect(() => {
         dispatch(dayStartLoading('month', currentDate));  //hay que hacerlo con currentdate para cada mes + botones atras y adelante
     }, [dispatch, currentDate])
 
-
-
     return (
         <div className="fill-parent">
             <MainTopBar
-                handleBack={() => setCurentDate(date.add(-1, 'month').toDate())}
-                handleForward={() => setCurentDate(date.add(1, 'month').toDate())}
-                title={`${last.format('MMMM')}`}
-                last={(last.toDate().getTime() >= new Date().getTime())}
+                handleBack={() => switchMonth(-1)}
+                handleForward={() => switchMonth(1)}
+                title={topBar.title}
+                last={topBar.last}
             />
 
             <div className="content-scroll-y">

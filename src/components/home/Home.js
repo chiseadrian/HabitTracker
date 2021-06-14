@@ -16,13 +16,13 @@ export const Home = () => {
             <div className="sidebar-button-home">
                 <OpenCloseSidebar />
             </div>
+
             <div className="centered">
                 <Timer />
             </div>
 
             <div className="centered-bottom">
                 <div className="quote">{text}</div>
-
                 <em className="quote-author">- {author}</em>
             </div>
         </div>

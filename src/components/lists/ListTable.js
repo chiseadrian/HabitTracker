@@ -49,9 +49,7 @@ export const ListTable = ({ list }) => {
                                     />
                                 ))
                             )
-                            : (
-                                <tr><th colSpan={columns.length + 3} style={{ textAlign: 'center' }}>No data available</th></tr>
-                            )
+                            : <tr><th colSpan={columns.length + 3} style={{ textAlign: 'center' }}>No data available</th></tr>
                     }
                 </tbody>
             </table >
