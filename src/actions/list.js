@@ -11,6 +11,7 @@ export const listStartLoading = () => {
             const resp = await fetchConToken(`lists`);
             const body = await resp.json();
             const lists = body.lists;
+
             dispatch(listSetActive(lists[0]));
             dispatch(listsLoaded(lists));
         } catch (error) {
@@ -76,6 +77,7 @@ export const listStartUpdateList = (list) => {
             (body.ok)
                 ? dispatch(listUpdate(list))
                 : Swal.fire('Error', body.msg, 'error');
+
             dispatch(listSetActive(list));
         } catch (error) {
             console.log(error);
@@ -109,42 +111,13 @@ export const listStartRow = (type, row) => {
 }
 
 
-export const listsLoaded = (lists) => ({
-    type: types.listLoaded,
-    payload: lists
-});
-export const listDelete = (id) => ({
-    type: types.listDelete,
-    payload: id
-});
-export const listAddNewList = (list) => ({
-    type: types.listAddNewList,
-    payload: list
-});
-export const listUpdate = (list) => ({
-    type: types.listUpdate,
-    payload: list
-});
-export const listDeleteRow = (rowId) => ({
-    type: types.listDeleteRow,
-    payload: rowId
-});
-export const listAddNewRow = (row) => ({
-    type: types.listAddNewRow,
-    payload: row
-});
-export const listUpdateRow = (row) => ({
-    type: types.listUpdateRow,
-    payload: row
-});
-export const listSetActive = (list) => ({
-    type: types.listSetActive,
-    payload: list
-});
-export const listClearActive = () => ({
-    type: types.listClearActive
-});
-export const listSetActiveRow = (row) => ({
-    type: types.listSetActiveRow,
-    payload: row
-});
+export const listAddNewList = (list) => ({ type: types.listAddNewList, payload: list });
+export const listAddNewRow = (row) => ({ type: types.listAddNewRow, payload: row });
+export const listClearActive = () => ({ type: types.listClearActive });
+export const listDelete = (id) => ({ type: types.listDelete, payload: id });
+export const listDeleteRow = (rowId) => ({ type: types.listDeleteRow, payload: rowId });
+export const listSetActive = (list) => ({ type: types.listSetActive, payload: list });
+export const listSetActiveRow = (row) => ({ type: types.listSetActiveRow, payload: row });
+export const listsLoaded = (lists) => ({ type: types.listLoaded, payload: lists });
+export const listUpdate = (list) => ({ type: types.listUpdate, payload: list });
+export const listUpdateRow = (row) => ({ type: types.listUpdateRow, payload: row });

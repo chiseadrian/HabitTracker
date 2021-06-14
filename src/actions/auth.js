@@ -12,16 +12,16 @@ export const startLogin = (email, password) => {
         const resp = await fetchSinToken('auth', { email, password }, 'POST');
         const body = await resp.json();
 
-        if (body.ok) {
-            localStorage.setItem('token', body.token);
-            localStorage.setItem('token-init-date', new Date().getTime());  //guarda la hora en la que se ha creado el token porque tiene 2h de vida
-            dispatch(login({
-                uid: body.uid,
-                name: body.name
-            }));
-        } else {
-            Swal.fire('Error', body.msg, 'error');
-        }
+        auxLogin(dispatch, body);
+    }
+}
+
+export const startGoogleLogin = (id_token) => {
+    return async (dispatch) => {
+        const resp = await fetchSinToken('auth/google', { id_token }, 'POST');
+        const body = await resp.json();
+
+        auxLogin(dispatch, body);
     }
 }
 
@@ -31,8 +31,7 @@ export const startRegister = (email, password, name) => {
         const body = await resp.json();
 
         if (body.ok) {
-            localStorage.setItem('token', body.token);
-            localStorage.setItem('token-init-date', new Date().getTime());  //guarda la hora en la que se ha creado el token porque tiene 2h de vida
+            saveTokenInLocalStorage(body.token);
             Swal.fire(
                 'Verify account',
                 `We sent an email to ${email} to make sure you own it. Please check your inbox and verify your email`,
@@ -44,23 +43,6 @@ export const startRegister = (email, password, name) => {
     }
 }
 
-export const startGoogleLogin = (id_token) => {
-    return async (dispatch) => {
-        const resp = await fetchSinToken('auth/google', { id_token }, 'POST');
-        const body = await resp.json();
-
-        if (body.ok) {
-            localStorage.setItem('token', body.token);
-            localStorage.setItem('token-init-date', new Date().getTime());
-            dispatch(login({
-                uid: body.uid,
-                name: body.name
-            }));
-        } else {
-            Swal.fire('Error', body.msg, 'error');
-        }
-    }
-}
 
 export const startCheckin = () => {
     return async (dispatch) => {
@@ -68,8 +50,7 @@ export const startCheckin = () => {
         const body = await resp.json();
 
         if (body.ok) {
-            localStorage.setItem('token', body.token);
-            localStorage.setItem('token-init-date', new Date().getTime());  //guarda la hora en la que se ha creado el token porque tiene 2h de vida
+            saveTokenInLocalStorage(body.token);
             dispatch(login({
                 uid: body.uid,
                 name: body.name
@@ -91,9 +72,24 @@ export const startLogout = () => {
     }
 }
 
-const login = (user) => ({
-    type: types.authLogin,
-    payload: user
-});
-const checkingFinish = () => ({ type: types.authCheckingFinish });
-const logout = () => ({ type: types.authLogout });
+const auxLogin = (dispatch, body) => {
+    const { ok, token, uid, name, msg } = body;
+
+    if (ok) {
+        saveTokenInLocalStorage(token);
+        dispatch(login({
+            uid: uid,
+            name: name
+        }));
+    } else {
+        Swal.fire('Error', msg, 'error');
+    }
+}
+const saveTokenInLocalStorage = (token) => {
+    localStorage.setItem('token', token);
+    localStorage.setItem('token-init-date', new Date().getTime());  //guarda la hora en la que se ha creado el token porque tiene 2h de vida
+}
+
+export const login = (user) => ({ type: types.authLogin, payload: user });
+export const logout = () => ({ type: types.authLogout });
+export const checkingFinish = () => ({ type: types.authCheckingFinish });

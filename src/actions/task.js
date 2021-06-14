@@ -16,6 +16,7 @@ export const dayStartLoading = (period, date) => {
             const resp = await fetchConToken(`days/${start}/${end}`);
             const body = await resp.json();
             const days = body.days;
+
             dispatch(routineStartLoading());
             dispatch(taskLoaded(days))
         } catch (error) {
@@ -23,79 +24,31 @@ export const dayStartLoading = (period, date) => {
         }
     }
 }
-export const taskLoaded = (days) => ({
-    type: types.taskLoaded,
-    payload: days
-})
 
 export const taskStartUpdateChange = (changeDay, change) => {
     return (dispatch, getState) => {
         const changes = getState().week.changes;
+        const inChanges = checkIsInChanges(changes, change.numDay);
 
-        const inChanges = checkIsInChanges(changes, change.numDay); //comprueba si ya se esta en week.changes
-        if (!inChanges) dispatch(taskAddNewChange(changeDay));      //si no está se añade
-        else dispatch(taskUpdateChange(change));                    //si está se actualiza
+        (!inChanges)
+            ? dispatch(taskAddNewChange(changeDay))
+            : dispatch(taskUpdateChange(change));
     }
 }
-export const taskUpdateChange = (task) => ({
-    type: types.taskUpdateChange,
-    payload: task
-})
-export const taskAddNewChange = (task) => ({
-    type: types.taskAddNewChange,
-    payload: task
-})
-export const taskAddNewDay = (day) => ({
-    type: types.taskAddNewDay,
-    payload: day
-})
-
-export const taskClearChanges = () => ({
-    type: types.taskClearChanges
-})
-
-export const taskUpdate = (task) => ({
-    type: types.taskUpdate,
-    payload: task
-})
 
 export const taskStartSave = () => {
     return async (dispatch, getState) => {
         const changes = getState().week.changes;
         let errors = false;
-        let resp = null;
-        let body = null;
 
         try {
             changes.forEach(async change => {
-                let newDone = 0;
-                for (let rid in change.values) {
-                    const time = timeToMinutes(change.values[rid]);
-                    change.values[rid] = time;
-                    if (time !== null) {
-                        newDone += time
-                    } else {
-                        errors = true;
-                        throw Swal.fire('Incorrect Format', 'e.g 1:30', 'error');
-                    }
-                }
+                const { newDone, error } = calculateDone(change, errors);
                 change.done = newDone;
-                if (!errors) {
-                    try {
-                        if (change.id === undefined) {//si el dia no existe se crea
-                            resp = await fetchConToken('days', change, 'POST');
-                            body = await resp.json();
-                        } else {
-                            resp = await fetchConToken(`days/${change.id}`, { done: change.done, values: change.values }, 'PUT');
-                            body = await resp.json();
-                        }
-                        (body.ok)
-                            ? dispatch(taskUpdate(change))
-                            : Swal.fire('Error', body.msg, 'error');
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }
+                errors = error;
+
+                if (!errors)
+                    await updateChange(dispatch, change);
             });
 
             if (!errors)
@@ -106,32 +59,54 @@ export const taskStartSave = () => {
     }
 }
 
-// export const dayStartLoadingMonth = () => {
-//     return async (dispatch, getState) => {
-//         const { uid } = getState().auth;
 
-//         try {
-//             const resp = await fetchConToken(`days/${uid}`);
-//             const body = await resp.json();
-//             const days = body.days;
-//             dispatch(routineStartLoading());
-//             dispatch(taskLoaded(days))
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// }
+const calculateDone = ({ values }) => {
+    let newDone = 0;
+    let error = false;
 
-export const taskClear = (task) => ({
-    type: types.taskClear
-})
+    for (let rid in values) {
+        const time = timeToMinutes(values[rid]);
+        values[rid] = time;
 
-export const taskUpdateChangeOnTasks = (toChange) => ({
-    type: types.taskUpdateChangeOnTasks,
-    payload: toChange
-})
+        if (time === null) {
+            error = true;
+            Swal.fire('Incorrect Format', 'e.g 1:30', 'error');
+        } else {
+            newDone += time
+        }
+    }
 
+    return { newDone, error };
+}
 
+const updateChange = async (dispatch, change) => {
+    const { id, done, values } = change;
+    let resp = null;
+    let body = null;
+
+    try {
+        (id === undefined)
+            ? resp = await fetchConToken('days', change, 'POST')                    //si el dia no existe, se crea
+            : resp = await fetchConToken(`days/${id}`, { done, values }, 'PUT');    //si existe se actualiza
+
+        body = await resp.json();
+
+        (body.ok)
+            ? dispatch(taskUpdate(change))
+            : Swal.fire('Error', body.msg, 'error');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const taskAddNewChange = (task) => ({ type: types.taskAddNewChange, payload: task });
+export const taskAddNewDay = (day) => ({ type: types.taskAddNewDay, payload: day });
+export const taskClear = () => ({ type: types.taskClear });
+export const taskClearChanges = () => ({ type: types.taskClearChanges });
+export const taskLoaded = (days) => ({ type: types.taskLoaded, payload: days });
+export const taskUpdate = (task) => ({ type: types.taskUpdate, payload: task });
+export const taskUpdateChange = (task) => ({ type: types.taskUpdateChange, payload: task });
+export const taskUpdateChangeOnTasks = (toChange) => ({ type: types.taskUpdateChangeOnTasks, payload: toChange });
 
 
 

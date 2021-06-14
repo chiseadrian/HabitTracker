@@ -9,6 +9,7 @@ export const noteStartLoading = () => {
         try {
             const resp = await fetchConToken(`notes`);
             const body = await resp.json();
+
             dispatch(notesLoaded(body.notes))
         } catch (error) {
             console.log(error);
@@ -30,6 +31,7 @@ export const noteStartAddNew = (note) => {
                     _id: uid,
                     name: name
                 }
+
                 dispatch(noteAddNew(note))
             }
             else
@@ -46,10 +48,9 @@ export const noteStartUpdate = (note) => {
             const resp = await fetchConToken(`notes/${note.id}`, note, 'PUT');
             const body = await resp.json();
 
-            if (body.ok)
-                dispatch(noteUpdate(note))
-            else
-                Swal.fire('Error', body.msg, 'error');
+            (body.ok)
+                ? dispatch(noteUpdate(note))
+                : Swal.fire('Error', body.msg, 'error');
         } catch (error) {
             console.log(error);
         }
@@ -76,29 +77,10 @@ export const noteStartDelete = (id) => {
 }
 
 
-export const noteSetActive = (note) => ({
-    type: types.noteSetActive,
-    payload: note
-})
-export const noteClearActive = () => ({
-    type: types.noteClearActive
-})
-export const notesLoaded = (notes) => ({
-    type: types.noteLoaded,
-    payload: notes
-})
-export const noteAddNew = (note) => ({
-    type: types.noteAddNew,
-    payload: note
-})
-export const noteUpdate = (note) => ({
-    type: types.noteUpdate,
-    payload: note
-})
-export const noteClear = (note) => ({
-    type: types.noteClear
-})
-export const noteDelete = (id) => ({
-    type: types.noteDelete,
-    payload: id
-})
+export const noteAddNew = (note) => ({ type: types.noteAddNew, payload: note });
+export const noteClear = (note) => ({ type: types.noteClear });
+export const noteClearActive = () => ({ type: types.noteClearActive });
+export const noteDelete = (id) => ({ type: types.noteDelete, payload: id });
+export const noteSetActive = (note) => ({ type: types.noteSetActive, payload: note });
+export const notesLoaded = (notes) => ({ type: types.noteLoaded, payload: notes });
+export const noteUpdate = (note) => ({ type: types.noteUpdate, payload: note });
