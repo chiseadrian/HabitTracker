@@ -1,7 +1,7 @@
 import { timeToTableFormat } from "./timeFormat";
 
 
-export const calculateTotal = (days, routines) => {   //ej: return [mon: "3:00", tue: "3:00"]
+export const calculateTotalWeek = (days, routines) => {   //ej: return [mon: "3:00", tue: "3:00"]
     let total = [];
     total.done = total.goal = 0;
 
@@ -47,7 +47,6 @@ export const calculateTotalMonth = (days, routines, numDaysMonth) => {
         monthDone[id] = 0;
         routineNames[id] = name;
     });
-    // console.log(monthGoal)
 
     days.forEach(({ values }) => {
         for (let rid in values) {

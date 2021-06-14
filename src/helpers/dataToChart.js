@@ -1,5 +1,7 @@
 import moment from "moment";
+
 import { colors } from "../static/colors";
+
 
 export const getRoutinesToChart = (routines) => {
     let names = [];

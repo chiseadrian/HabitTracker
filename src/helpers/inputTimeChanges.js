@@ -1,5 +1,5 @@
 
-export const inChanges = (changes, id, numDay, numMonth, numYear) => {
+export const inChanges = (changes, id, numDay, numMonth, numYear) => {  //deveuelve el valor del timeInput mientras está cambiando (Week)
     let changed = null;
     if (changes.length === 0)   //si no hay cambios
         return changed;

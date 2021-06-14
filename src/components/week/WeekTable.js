@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { WeekHabit } from './WeekHabit';
 import { timeToTableFormat } from '../../helpers/timeFormat';
-import { calculateTotal } from '../../helpers/calculateTotal';
+import { calculateTotalWeek } from '../../helpers/calculateTotal';
 import { dayStartLoading } from '../../actions/task';
 
 
@@ -12,7 +12,7 @@ let weekChanged = false;
 export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays }) => {
     const dispatch = useDispatch();
     const { changes } = useSelector(state => state.week);
-    const totals = calculateTotal(days, routines);
+    const totals = calculateTotalWeek(days, routines);
 
     useEffect(() => {
         dispatch(dayStartLoading('week', currentDate));

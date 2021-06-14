@@ -36,20 +36,6 @@ export const dateMonth = (date) => {
     return { first, last, start, end }
 }
 
-export const getTodayNumber = () => {
-    const today = moment(new Date());
-    return parseInt(today.format('DD'));
-}
-
-export const getDateNumbers = (date = new Date()) => {
-    const aux = moment(date);
-    return {
-        day: parseInt(aux.format('DD')),
-        month: parseInt(aux.format('MM')),
-        year: parseInt(aux.format('YYYY'))
-    };
-}
-
 export const giveStartEndPeriod = (period, date) => {
     if (period === 'week') {
         const { start, end } = dateWeek(date);
@@ -61,4 +47,19 @@ export const giveStartEndPeriod = (period, date) => {
     }
 
     return null;
+}
+
+export const getTodayNumber = () => {
+    const today = moment(new Date());
+    return parseInt(today.format('DD'));
+}
+
+export const getDateNumbers = (date = new Date()) => {
+    const aux = moment(date);
+
+    return {
+        day: parseInt(aux.format('DD')),
+        month: parseInt(aux.format('MM')),
+        year: parseInt(aux.format('YYYY'))
+    };
 }
