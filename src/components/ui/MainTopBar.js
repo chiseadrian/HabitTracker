@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { OpenCloseSidebar } from './OpenCloseSidebar';
+import { ToggleSidebar } from './ToggleSidebar';
 
 
 export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
     return (
         <div className="main__top-bar">
             <div>
-                <OpenCloseSidebar />
+                <ToggleSidebar />
 
                 {
                     (handleBack) && (

@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import { getRandomQuote } from '../../helpers/prepareState';
-import { OpenCloseSidebar } from '../ui/OpenCloseSidebar';
+import { ToggleSidebar } from '../ui/ToggleSidebar';
 import { Timer } from './Timer';
 
 
@@ -14,7 +14,7 @@ export const Home = () => {
     return (
         <div className="home__main-content" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <div className="sidebar-button-home">
-                <OpenCloseSidebar />
+                <ToggleSidebar />
             </div>
 
             <div className="centered">

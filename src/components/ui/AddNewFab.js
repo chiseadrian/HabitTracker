@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import { uiOpenListModal, uiOpenNoteModal, uiOpenRoutineModal } from '../../actions/ui';
 import { taskStartSave } from '../../actions/task';
 
@@ -8,14 +9,21 @@ export const AddNewFab = ({ type }) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
-        if (type === 'note') {
-            dispatch(uiOpenNoteModal());
-        } else if (type === 'routine') {
-            dispatch(uiOpenRoutineModal());
-        } else if (type === "guardar") {
-            dispatch(taskStartSave());
-        } else if (type === 'list-row') {
-            dispatch(uiOpenListModal('list-row-add'))
+        switch (type) {
+            case 'note':
+                dispatch(uiOpenNoteModal());
+                break;
+            case 'routine':
+                dispatch(uiOpenRoutineModal());
+                break;
+            case 'guardar':
+                dispatch(taskStartSave());
+                break;
+            case 'list-row':
+                dispatch(uiOpenListModal('list-row-add'))
+                break;
+            default:
+                break;
         }
     }
 

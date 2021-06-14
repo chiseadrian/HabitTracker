@@ -3,21 +3,22 @@ import React, { useEffect, useState } from 'react';
 import { MainTopBar } from '../ui/MainTopBar';
 import { timeToTimerFormat } from '../../helpers/timeFormat';
 
+
 export const TimerScreen = () => {
     const [play, setPlay] = useState(false);
     const [initial, setInitial] = useState(null);
     const [diff, setDiff] = useState(null);
     const { hours, minutes, seconds, milliseconds } = timeToTimerFormat(diff);
 
-    const handleStartPause = () => {
-        if (!play && !initial) {   //play (first time)
-            setInitial(new Date());
-        } else if (!play) {        // paly (after stop)
-            setInitial(new Date(new Date() - diff))
-        }
+
+    const handlePlay = () => {
+        (!play && !initial)
+            ? setInitial(new Date())                              // play (first time)
+            : (!play) && setInitial(new Date(new Date() - diff))  // paly (after stop)
 
         setPlay(!play);
     }
+
     const handleRestart = () => {
         setPlay(false);
         setInitial(new Date());
@@ -31,19 +32,13 @@ export const TimerScreen = () => {
     }
 
     useEffect(() => {
-        if (initial)
-            requestAnimationFrame(tick);
+        (initial) && requestAnimationFrame(tick);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [initial]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (diff && play)
-                tick();
-        }, 10);
-        return () => {
-            clearInterval(interval);
-        }
+        const interval = setInterval(() => { (diff && play) && tick() }, 10);
+        return () => { clearInterval(interval); }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [diff, play]);
 
@@ -59,11 +54,9 @@ export const TimerScreen = () => {
                 </div>
 
 
-                <button className="start-timer" onClick={handleStartPause} title="Play/Pause">
+                <button className="start-timer" onClick={handlePlay} title="Play/Pause">
                     {
-                        (play)
-                            ? <i className="fas fa-pause"></i>
-                            : <i className="fas fa-play"></i>
+                        (play) ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>
                     }
                 </button>
                 {/* <button className="button-timer" onClick={handleFlagTime} title="Flag Time" disabled={!play}>

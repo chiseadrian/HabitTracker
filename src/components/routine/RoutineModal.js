@@ -7,23 +7,11 @@ import { routineClearActive, routineStartAddNew, routineStartUpdate } from '../.
 import { uiCloseModal } from '../../actions/ui';
 import { timeToMinutes, timeToTableFormat } from '../../helpers/timeFormat';
 import { useForm } from '../../hooks/useForm';
+import { modalCustomStyle } from '../../static/modalCustomStyle';
 
 
 Modal.setAppElement('#root');
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        height: 'auto',
-        maxHeight: 'fit-content',
-        paddingBottom: '20px'
-    }
-};
 const initEvent = {
     name: '',
     frecuency: '7',
@@ -37,17 +25,6 @@ export const RoutineModal = () => {
 
     const [formValues, handleInputChange, setFormValues] = useForm(initEvent);
     const { name, frecuency, goal } = formValues;
-
-
-    useEffect(() => {
-        if (activeRoutine) {
-            setFormValues({
-                ...activeRoutine,
-                goal: timeToTableFormat(activeRoutine.goal)
-            })
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeRoutine])
 
 
     const handleSubmitForm = (e) => {
@@ -65,14 +42,9 @@ export const RoutineModal = () => {
         if (!data.goal)
             return Swal.fire('Goal format incorrect !', '', 'warning');
 
-        if (activeRoutine) {
-            dispatch(routineStartUpdate(data));
-        } else {
-            dispatch(routineStartAddNew({
-                ...data,
-                date: new Date().getTime()
-            }));
-        }
+        (activeRoutine)
+            ? dispatch(routineStartUpdate(data))
+            : dispatch(routineStartAddNew({ ...data, date: new Date().getTime() }));
 
         closeModal();
     }
@@ -80,25 +52,29 @@ export const RoutineModal = () => {
     const closeModal = () => {
         if (activeRoutine)
             dispatch(routineClearActive());
+
         dispatch(uiCloseModal());
         setFormValues(initEvent);
     }
+
+    useEffect(() => {
+        if (activeRoutine)
+            setFormValues({ ...activeRoutine, goal: timeToTableFormat(activeRoutine.goal) })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeRoutine]);
 
     return (
         <Modal
             isOpen={modalRoutineOpen}
             onRequestClose={closeModal}
-            style={customStyles}
+            style={modalCustomStyle}
             className="modal"
             overlayClassName="modal-fondo"
             closeTimeoutMS={200}
         >
             <h2 className="ml-1"> {(activeRoutine) ? 'Edit' : 'Add'} Routine </h2>
 
-            <form
-                className="container"
-                onSubmit={handleSubmitForm}
-            >
+            <form className="container" onSubmit={handleSubmitForm}>
                 <div className="form-group row space-between">
                     <label className="col-sm-3 col-form-label"> Name: </label>
                     <div className="col-sm-9">

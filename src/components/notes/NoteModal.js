@@ -6,20 +6,11 @@ import Swal from 'sweetalert2';
 import { uiCloseModal } from '../../actions/ui';
 import { useForm } from '../../hooks/useForm';
 import { noteClearActive, noteStartAddNew, noteStartDelete, noteStartUpdate } from '../../actions/note';
+import { modalCustomStyle } from '../../static/modalCustomStyle';
 
 
 Modal.setAppElement('#root');
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-    }
-};
 const initEvent = {
     title: '',
     body: '',
@@ -32,13 +23,6 @@ export const NoteModal = () => {
 
     const [formValues, handleInputChange, setFormValues] = useForm(initEvent);
     const { body, title } = formValues;
-
-
-    useEffect(() => {
-        if (activeNote)
-            setFormValues(activeNote)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeNote])
 
 
     const handleSubmitForm = (e) => {
@@ -75,11 +59,17 @@ export const NoteModal = () => {
         setFormValues(initEvent);
     }
 
+    useEffect(() => {
+        if (activeNote)
+            setFormValues(activeNote)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeNote])
+
     return (
         <Modal
             isOpen={modalNoteOpen}
             onRequestClose={closeModal}
-            style={customStyles}
+            style={modalCustomStyle}
             className="modal"
             overlayClassName="modal-fondo"
             closeTimeoutMS={200}

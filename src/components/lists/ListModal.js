@@ -3,24 +3,12 @@ import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { uiCloseModal } from '../../actions/ui';
+import { modalCustomStyle } from '../../static/modalCustomStyle';
 import { ListNewListFormModal } from './ListNewListFormModal';
 import { ListNewRowFormModal } from './ListNewRowFormModal';
 
 Modal.setAppElement('#root');
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        height: 'auto',
-        maxHeight: 'fit-content',
-        paddingBottom: '20px'
-    }
-};
 
 export const ListModal = () => {
     const dispatch = useDispatch();
@@ -34,7 +22,7 @@ export const ListModal = () => {
         <Modal
             isOpen={modalListOpen}
             onRequestClose={closeModal}
-            style={customStyles}
+            style={modalCustomStyle}
             className="modal"
             overlayClassName="modal-fondo"
             closeTimeoutMS={200}

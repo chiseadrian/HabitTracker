@@ -13,10 +13,10 @@ export const RoutineScreen = () => {
     const dispatch = useDispatch();
     const { routines } = useSelector(state => state.routine);
 
+
     useEffect(() => {
         dispatch(routineStartLoading());
     }, [dispatch])
-
 
     return (
         <div className="fill-parent">

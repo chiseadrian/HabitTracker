@@ -9,11 +9,11 @@ export const Note = (note) => {
     const dispatch = useDispatch();
     const { title, body } = note;
 
-    const handleNote = (e) => {
+    const handleNote = () => {
         dispatch(noteSetActive(note));
         dispatch(uiOpenNoteModal());
     }
-    // noteStartDelete
+
 
     return (
         <li

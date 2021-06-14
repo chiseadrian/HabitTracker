@@ -2,6 +2,7 @@ import React from 'react';
 import { Radar } from 'react-chartjs-2';
 import { getRoutinesToChart } from '../../helpers/dataToChart';
 
+
 export const RoutineChart = ({ routines }) => {
     const { names, goalsWeek, goalsDay } = getRoutinesToChart(routines);
 

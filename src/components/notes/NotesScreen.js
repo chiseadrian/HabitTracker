@@ -8,18 +8,19 @@ import { NoteModal } from './NoteModal';
 import { MainTopBar } from '../ui/MainTopBar';
 import { uiOpenNoteModal } from '../../actions/ui';
 
+
 export const NotesScreen = () => {
     const dispatch = useDispatch();
     const { notes } = useSelector(state => state.note)
 
 
-    useEffect(() => {
-        dispatch(noteStartLoading());
-    }, [dispatch]);
-
     const handleAddNote = () => {
         dispatch(uiOpenNoteModal());
     }
+
+    useEffect(() => {
+        dispatch(noteStartLoading());
+    }, [dispatch]);
 
     return (
         <div className="fill-parent">
@@ -28,7 +29,7 @@ export const NotesScreen = () => {
             <div className="content-scroll-y">
                 {
                     (notes.length === 0) && (
-                        <div className="pointer-message" onClick={handleAddNote}>Add note</div>
+                        <div className="pointer-message" onClick={handleAddNote}> Add note </div>
                     )
                 }
                 <ul className="notes">

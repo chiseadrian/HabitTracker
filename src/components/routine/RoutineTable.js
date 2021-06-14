@@ -34,9 +34,7 @@ export const RoutineTable = ({ routines }) => {
                                     return <RoutineHabit key={i} {...habit} />
                                 })
                             )
-                            : (
-                                <tr><td colSpan="5" className="pointer-message tour-step-2" onClick={handleAddRoutine} >Add routine +</td></tr>
-                            )
+                            : <tr><td colSpan="5" className="pointer-message tour-step-2" onClick={handleAddRoutine} >Add routine +</td></tr>
                     }
                     {
                         (routines.length > 0) && (

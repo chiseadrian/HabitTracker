@@ -2,9 +2,10 @@ import React from 'react';
 
 import { dateWeek } from '../../helpers/dateFormat';
 import { timeToTableFormat } from '../../helpers/timeFormat';
-import { TimeInput } from '../ui/TimeInput';
+import { WeekTimeInput } from './WeekTimeInput';
 
 const today = new Date().getTime();
+
 
 export const WeekHabit = ({ rid, rname, rgoal, rdone, values, currentDate, weekChanged }) => {
     const { weekDays } = dateWeek(currentDate);
@@ -16,7 +17,7 @@ export const WeekHabit = ({ rid, rname, rgoal, rdone, values, currentDate, weekC
                 weekDays.map(({ day, month, year }, i) => {
                     const current = new Date(year, month - 1, day).getTime();
 
-                    return (<TimeInput
+                    return (<WeekTimeInput
                         key={i}
                         id={rid}
                         disabled={(current > today)}
