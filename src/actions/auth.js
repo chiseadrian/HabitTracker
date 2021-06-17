@@ -5,6 +5,7 @@ import { types } from '../types/types';
 import { noteClear } from './note';
 import { routineClear } from './routine';
 import { taskClear } from './task';
+import { uiCloseModal } from './ui';
 
 
 export const startLogin = (email, password) => {
@@ -26,7 +27,7 @@ export const startGoogleLogin = (id_token) => {
 }
 
 export const startRegister = (email, password, name) => {
-    return async (dispatch) => {
+    return async () => {
         const resp = await fetchSinToken('auth/new', { email, password, name }, 'POST');
         const body = await resp.json();
 
@@ -43,7 +44,6 @@ export const startRegister = (email, password, name) => {
     }
 }
 
-
 export const startCheckin = () => {
     return async (dispatch) => {
         const resp = await fetchConToken('auth/renew');
@@ -53,12 +53,38 @@ export const startCheckin = () => {
             saveTokenInLocalStorage(body.token);
             dispatch(login({
                 uid: body.uid,
-                name: body.name
+                name: body.name,
+                email: body.email
             }));
         } else {
             dispatch(checkingFinish());
         }
 
+    }
+}
+
+export const startUpdateUser = (newUserData) => {
+    return async (dispatch) => {
+        const resp = await fetchConToken('auth/updateUser', newUserData, 'POST');
+        const body = await resp.json();
+
+        if (body.ok) {
+            const { user } = body;
+            dispatch(login({
+                uid: user.uid,
+                name: user.name,
+                email: user.email
+            }));
+            dispatch(uiCloseModal());
+            Swal.fire({
+                icon: 'success',
+                title: 'Updated profile!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        } else {
+            Swal.fire('Error', body.msg, 'error');
+        }
     }
 }
 
@@ -73,13 +99,14 @@ export const startLogout = () => {
 }
 
 const auxLogin = (dispatch, body) => {
-    const { ok, token, uid, name, msg } = body;
+    const { ok, token, uid, name, email, msg } = body;
 
     if (ok) {
         saveTokenInLocalStorage(token);
         dispatch(login({
             uid: uid,
-            name: name
+            name: name,
+            email
         }));
     } else {
         Swal.fire('Error', msg, 'error');

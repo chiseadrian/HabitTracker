@@ -39,9 +39,6 @@ export const WeekTimeInput = ({ id, disabled, dayData, numDay, numMonth, numYear
     }
 
     const updateDay = (value) => {
-
-        // dispatch(taskStartUpdateChange(change, { date: dayData.day.date, rid: id, value: value }));
-
         const inChanges = checkIsInChanges(changes, dayData.day.date);
 
         (!inChanges)

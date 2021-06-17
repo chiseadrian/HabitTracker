@@ -2,6 +2,7 @@ export const types = {
     uiOpenNoteModal: '[ui] Open note modal',
     uiOpenRoutineModal: '[ui] Open routine modal',
     uiOpenListModal: '[ui] Open list modal',
+    uiOpenUserEditModal: '[ui] Open user edit modal',
     uiCloseModal: '[ui] Close modal',
     uiOpenSidebar: '[ui] Open sidebar',
     uiCloseSidebar: '[ui] Close sidebar',

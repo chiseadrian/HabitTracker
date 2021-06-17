@@ -4,6 +4,7 @@ const initialState = {
     modalNoteOpen: false,
     modalRoutineOpen: false,
     modalListOpen: false,
+    modalUserEditOpen: false,
     modalType: '',
     sidebarOpen: false,
     backgroundImage: ''
@@ -27,6 +28,11 @@ export const uiReducer = (state = initialState, action) => {
                 modalListOpen: true,
                 modalType: action.payload
             };
+        case types.uiOpenUserEditModal:
+            return {
+                ...state,
+                modalUserEditOpen: true
+            };
         case types.uiOpenSidebar:
             return {
                 ...state,
@@ -38,6 +44,7 @@ export const uiReducer = (state = initialState, action) => {
                 modalNoteOpen: false,
                 modalRoutineOpen: false,
                 modalListOpen: false,
+                modalUserEditOpen: false,
                 modalType: ''
             };
         case types.uiCloseSidebar:

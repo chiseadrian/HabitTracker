@@ -14,7 +14,7 @@ export const ToggleSidebar = () => {
 
     return (
         <>
-            <button className="open-close-sidebar" onClick={handleToggleSidebar}>
+            <button className="top-bar-buttons-home" onClick={handleToggleSidebar}>
                 {
                     (sidebarOpen)
                         ? <i className="fas fa-times"></i>

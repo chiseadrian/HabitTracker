@@ -20,6 +20,7 @@ export const uiCloseModal = () => ({ type: types.uiCloseModal });
 export const uiCloseSidebar = () => ({ type: types.uiCloseSidebar });
 export const uiOpenListModal = (modalType) => ({ type: types.uiOpenListModal, payload: modalType });
 export const uiOpenNoteModal = () => ({ type: types.uiOpenNoteModal });
+export const uiOpenUserEditModal = () => ({ type: types.uiOpenUserEditModal });
 export const uiOpenRoutineModal = () => ({ type: types.uiOpenRoutineModal });
 export const uiOpenSidebar = () => ({ type: types.uiOpenSidebar });
 export const uiSetBackgroundImage = (image) => ({ type: types.uiSetBackgroundImage, payload: image });
