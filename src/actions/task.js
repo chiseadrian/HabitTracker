@@ -39,8 +39,16 @@ export const taskStartSave = () => {
                     await updateChange(dispatch, change);
             });
 
-            if (!errors)
+            if (!errors) {
                 dispatch(taskClearChanges());
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Saved successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }
         } catch (error) {
             Swal.fire('Incorrect Format', 'e.g 1:30', 'error');
         }
