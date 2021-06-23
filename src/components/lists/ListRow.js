@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
+import parse from 'html-react-parser';
 
 import { listSetActiveRow, listStartRow } from '../../actions/list';
 import { uiOpenListModal } from '../../actions/ui';
@@ -54,7 +55,7 @@ export const ListRow = ({ row, date: id }) => {
             <td > {row.date} </td>
             {
                 columns.map((col, i) => (
-                    <td key={i}> {row[col]} </td>
+                    <td key={i}> {(row[col] !== undefined) && parse(`${row[col]}`)} </td>
                 ))
             }
         </tr>
