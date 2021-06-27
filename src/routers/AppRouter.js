@@ -27,7 +27,7 @@ export const AppRouter = () => {
 
     return (
         <Router>
-            <div className="flex">
+            <div className="flex full-screen">
                 <Switch>
                     <PublicRoute
                         exact
