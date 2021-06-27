@@ -6,11 +6,31 @@
 html, body {
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 main {
     width: 100%;
 }
+
+//scrollbar
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover{
+    background: $primary;
+}
+::-webkit-scrollbar-track{
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 7px 10px 12px #f0f0f0;
+}
+
 
 .mt-1 {
     margin-top: 5px;
@@ -55,12 +75,10 @@ main {
 .contenedor{
     width: calc(100vw - 250px);
     height: 100vh;
-    overflow-y: scroll;
 }
 .contenedor-sidebar-closed{
-    width: 100vw;// width: calc(100vw - 80px);
+    width: 100vw;
     height: 100vh;
-    overflow-y: scroll;
 }
 
 .full-screen{

@@ -16,7 +16,7 @@ export const DashboardRoutes = () => {
     const { sidebarOpen } = useSelector(state => state.ui);
 
     return (
-        <div className="flex">
+        <>
             <Sidebar />
             <div className={(sidebarOpen) ? 'contenedor' : 'contenedor-sidebar-closed'}>
                 <Switch>
@@ -31,6 +31,6 @@ export const DashboardRoutes = () => {
                     <Redirect to="/" />
                 </Switch>
             </div >
-        </div >
+        </ >
     )
 }
