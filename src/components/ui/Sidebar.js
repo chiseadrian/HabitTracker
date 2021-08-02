@@ -4,9 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { startLogout } from '../../actions/auth';
 import { uiCloseSidebar } from '../../actions/ui';
 import { sidebarOptions } from '../../static/sidebarOptions';
+import { useTranslation } from 'react-i18next';
 
 
 export const Sidebar = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { sidebarOpen } = useSelector(state => state.ui);
 
@@ -32,14 +34,14 @@ export const Sidebar = () => {
 
                 {
                     sidebarOptions.map(({ title, icon, to }) =>
-                        <li className="sidebar-item" title={title} key={title}>
+                        <li className="sidebar-item" title={t(title)} key={title}>
                             <NavLink
                                 activeClassName="current"
                                 className="nav-item nav-link"
                                 to={to}
                             >
                                 <i className={icon}></i>
-                                {(sidebarOpen) && title}
+                                {(sidebarOpen) && t(title)}
                             </NavLink>
                         </li>
                     )
@@ -48,7 +50,7 @@ export const Sidebar = () => {
 
             <button className="logout" onClick={handleLogout} >
                 <i className="fas fa-sign-out-alt"></i>
-                {(sidebarOpen) && 'Logout'}
+                {(sidebarOpen) && t('Logout')}
             </button>
         </nav >
     )

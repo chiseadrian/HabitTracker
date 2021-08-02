@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
+import { useTranslation } from 'react-i18next';
 
+import i18next from 'i18next';
 import { useForm } from '../../hooks/useForm';
 import { uiCloseModal } from '../../actions/ui';
 import { modalCustomStyle } from '../../static/modalCustomStyle';
 import { startUpdateUser } from '../../actions/auth';
+import spain from "../../language/flags/spain.png";
+import uk from "../../language/flags/uk.png";
 
 
 Modal.setAppElement('#root');
@@ -15,16 +19,47 @@ const initEvent = {
     name: '',
     email: '',
     newPassword: '',
-    newPassword2: ''
+    newPassword2: '',
+    language: 'en'
 }
 
 export const UserEditModal = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { modalUserEditOpen } = useSelector(state => state.ui);
-    const { name: currentName, email: currentEmail } = useSelector(state => state.auth);
+    const { name: currentName, email: currentEmail, language: currentLanguage } = useSelector(state => state.auth);
     const [formValues, handleInputChange, setFormValues] = useForm(initEvent);
-    const { name, email, newPassword2, newPassword } = formValues;
+    const { name, email, newPassword2, newPassword, language } = formValues;
 
+
+    const handleLanguage = (lang) => {
+        i18next.changeLanguage(lang);
+        setFormValues({ ...formValues, language: lang });
+    }
+
+    const updateUser = async () => {
+        await Swal.fire({
+            title: t('Insert your current password'),
+            input: 'password',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: t('Save'),
+            showLoaderOnConfirm: false,
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then((result) => {
+            if (result.isConfirmed) {
+                dispatch(startUpdateUser({
+                    password: result.value,
+                    name,
+                    email,
+                    newPassword,
+                    language
+                }));
+            }
+        });
+    }
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
@@ -46,39 +81,16 @@ export const UserEditModal = () => {
         await updateUser();
     }
 
-    const updateUser = async () => {
-        await Swal.fire({
-            title: 'Insert your current password: ',
-            input: 'password',
-            inputAttributes: {
-                autocapitalize: 'off'
-            },
-            showCancelButton: true,
-            confirmButtonText: 'Save',
-            showLoaderOnConfirm: false,
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then((result) => {
-            if (result.isConfirmed) {
-                dispatch(startUpdateUser({
-                    password: result.value,
-                    name,
-                    email,
-                    newPassword
-                }));
-            }
-        });
-    }
-
     const closeModal = () => {
         dispatch(uiCloseModal());
     }
-
 
     useEffect(() => {
         setFormValues({
             ...formValues,
             name: currentName,
-            email: currentEmail
+            email: currentEmail,
+            language: currentLanguage
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -94,7 +106,7 @@ export const UserEditModal = () => {
             closeTimeoutMS={200}
         >
             <div className="modal-title">
-                <h2 className="ml-1"> Edit User </h2>
+                <h2 className="ml-1"> {t('Edit User')} </h2>
             </div>
 
             <form
@@ -102,7 +114,7 @@ export const UserEditModal = () => {
                 onSubmit={handleSubmitForm}
             >
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> Name: </label>
+                    <label className="col-sm-3 col-form-label"> {t("Name")}: </label>
                     <div className="col-sm-9">
                         <input
                             type="text"
@@ -118,7 +130,7 @@ export const UserEditModal = () => {
                 <br />
 
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> Email: </label>
+                    <label className="col-sm-3 col-form-label"> {t("Email")}: </label>
                     <div className="col-sm-9">
                         <input
                             type="email"
@@ -131,10 +143,24 @@ export const UserEditModal = () => {
                         />
                     </div>
                 </div>
+                <br />
+
+                <div className="form-group row">
+                    <label className="col-sm-3 col-form-label"> {t("Language")}: </label>
+                    <div className="col-sm-9 flex">
+                        <div onClick={() => handleLanguage('en')} className="flag-button" >
+                            <img src={uk} className={(language === 'en' ? 'current-flag flag' : 'flag')} alt={t('English')} />
+                        </div>
+                        <div onClick={() => handleLanguage('es')} className="flag-button" >
+                            <img src={spain} className={(language === 'es' ? 'current-flag flag' : 'flag')} alt={t('Spanish')} />
+                        </div>
+                    </div>
+                </div>
+
                 <hr />
 
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> New Password: </label>
+                    <label className="col-sm-3 col-form-label"> {t("New Password")}: </label>
                     <div className="col-sm-9">
                         <input
                             type="password"
@@ -150,7 +176,7 @@ export const UserEditModal = () => {
                 <br />
 
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> Repeat password: </label>
+                    <label className="col-sm-3 col-form-label"> {t("Repeat Password")}: </label>
                     <div className="col-sm-9">
                         <input
                             type="password"
@@ -170,7 +196,7 @@ export const UserEditModal = () => {
                     className="modal-save"
                 >
                     <i className="far fa-save"></i>
-                    <span> Save </span>
+                    <span> {t("Save")} </span>
                 </button>
             </form>
 

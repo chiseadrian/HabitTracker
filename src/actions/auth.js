@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2';
+import i18next from 'i18next';
 
 import { fetchConToken, fetchSinToken } from '../helpers/fetch';
 import { types } from '../types/types';
@@ -54,12 +55,12 @@ export const startCheckin = () => {
             dispatch(login({
                 uid: body.uid,
                 name: body.name,
-                email: body.email
+                email: body.email,
+                language: body.language
             }));
         } else {
             dispatch(checkingFinish());
         }
-
     }
 }
 
@@ -73,12 +74,13 @@ export const startUpdateUser = (newUserData) => {
             dispatch(login({
                 uid: user.uid,
                 name: user.name,
-                email: user.email
+                email: user.email,
+                language: user.language
             }));
             dispatch(uiCloseModal());
             Swal.fire({
                 icon: 'success',
-                title: 'Updated profile!',
+                title: 'Updated profile',
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -103,10 +105,12 @@ const auxLogin = (dispatch, body) => {
 
     if (ok) {
         saveTokenInLocalStorage(token);
+        i18next.changeLanguage(body.language);  //asinga el idioma cuando hacemos login
         dispatch(login({
             uid: uid,
             name: name,
-            email
+            email,
+            language: body.language
         }));
     } else {
         Swal.fire('Error', msg, 'error');
