@@ -9,7 +9,7 @@ import { dayStartLoading } from '../../actions/task';
 
 let weekChanged = false;
 
-export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays }) => {
+export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays, t }) => {
     const dispatch = useDispatch();
     const { changes } = useSelector(state => state.week);
     const totals = calculateTotalWeek(days, routines);
@@ -25,17 +25,17 @@ export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays }) 
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" className="week__title-color table-warning">Task</th>
-                        <th scope="col" className="week__days-title">Mon</th>
-                        <th scope="col" className="week__days-title">Tue</th>
-                        <th scope="col" className="week__days-title">Wed</th>
-                        <th scope="col" className="week__days-title">Thu</th>
-                        <th scope="col" className="week__days-title">Fri</th>
-                        <th scope="col" className="week__days-title">Sat</th>
-                        <th scope="col" className="week__days-title">Sun</th>
-                        <th scope="col" className="week__done-title table-success">Done</th>
-                        <th scope="col" className="week__goal-title table-info">Goal</th>
-                        <th scope="col" className="week__title-color table-warning">%</th>
+                        <th scope="col" className="week__title-color table-warning">{t('Task')}</th>
+                        <th scope="col" className="week__days-title">{t('Mon')}</th>
+                        <th scope="col" className="week__days-title">{t('Tue')}</th>
+                        <th scope="col" className="week__days-title">{t('Wed')}</th>
+                        <th scope="col" className="week__days-title">{t('Thu')}</th>
+                        <th scope="col" className="week__days-title">{t('Fri')}</th>
+                        <th scope="col" className="week__days-title">{t('Sat')}</th>
+                        <th scope="col" className="week__days-title">{t('Sun')}</th>
+                        <th scope="col" className="week__done-title table-success">{t('Done')}</th>
+                        <th scope="col" className="week__goal-title table-info">{t('Goal')}</th>
+                        <th scope="col" className="week__title-color table-warning">{t('Completed')} (%)</th>
                     </tr>
                 </thead>
                 <tbody>

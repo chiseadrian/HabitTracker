@@ -10,7 +10,7 @@ import { ListNewRowFormModal } from './ListNewRowFormModal';
 Modal.setAppElement('#root');
 
 
-export const ListModal = () => {
+export const ListModal = ({ t }) => {
     const dispatch = useDispatch();
     const { modalListOpen, modalType } = useSelector(state => state.ui);
 
@@ -27,10 +27,10 @@ export const ListModal = () => {
             overlayClassName="modal-fondo"
             closeTimeoutMS={200}
         >
-            {(modalType === 'list') && <ListNewListFormModal type="add" />}
-            {(modalType === 'list-update') && <ListNewListFormModal type="update" />}
-            {(modalType === 'list-row-add') && <ListNewRowFormModal type="add" />}
-            {(modalType === 'list-row-update') && <ListNewRowFormModal type="update" />}
+            {(modalType === 'list') && <ListNewListFormModal type="add" t={t} />}
+            {(modalType === 'list-update') && <ListNewListFormModal type="update" t={t} />}
+            {(modalType === 'list-row-add') && <ListNewRowFormModal type="add" t={t} />}
+            {(modalType === 'list-row-update') && <ListNewRowFormModal type="update" t={t} />}
         </Modal >
     )
 }

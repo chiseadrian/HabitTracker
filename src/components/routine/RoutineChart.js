@@ -3,21 +3,21 @@ import { Radar } from 'react-chartjs-2';
 import { getRoutinesToChart } from '../../helpers/dataToChart';
 
 
-export const RoutineChart = ({ routines }) => {
+export const RoutineChart = ({ routines, t }) => {
     const { names, goalsWeek, goalsDay } = getRoutinesToChart(routines);
 
     const data = {
         labels: names,
         datasets: [
             {
-                label: 'Daily Routine',
+                label: t('Daily Routine'),
                 data: goalsDay,
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 1
             },
             {
-                label: 'Weekly Routine',
+                label: t('Weekly Routine'),
                 data: goalsWeek,
                 backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderColor: 'rgba(54, 162, 235, 1)',

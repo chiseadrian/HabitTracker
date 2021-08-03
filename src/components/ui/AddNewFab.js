@@ -5,7 +5,7 @@ import { uiOpenListModal, uiOpenNoteModal, uiOpenRoutineModal } from '../../acti
 import { taskStartSave } from '../../actions/task';
 
 
-export const AddNewFab = ({ type }) => {
+export const AddNewFab = ({ type, t }) => {
     const dispatch = useDispatch();
 
     const handleOnClick = () => {
@@ -34,7 +34,7 @@ export const AddNewFab = ({ type }) => {
         >
             {
                 (type === 'guardar')
-                    ? <div><i className="far fa-save"></i> Save </div>
+                    ? <div><i className="far fa-save"></i> {t('Save')} </div>
                     : <i className="fas fa-plus"></i>
             }
         </button>

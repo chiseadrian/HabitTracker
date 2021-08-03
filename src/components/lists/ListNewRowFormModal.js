@@ -10,7 +10,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 
 
-export const ListNewRowFormModal = ({ type }) => {
+export const ListNewRowFormModal = ({ type, t }) => {
     const dispatch = useDispatch();
     const { activeList, activeRow } = useSelector(state => state.list);
     const { columns } = activeList;
@@ -52,13 +52,13 @@ export const ListNewRowFormModal = ({ type }) => {
 
     return (
         <>
-            <h2 className="ml-1"> {(type === 'add') ? 'Add' : (type === 'update') && 'Edit'} Row </h2>
+            <h2 className="ml-1"> {(type === 'add') ? t('Add') : (type === 'update') && t('Edit')} </h2>
             <form
                 className="container"
                 onSubmit={handleSubmitForm}
             >
                 <div className="form-group row" >
-                    <label className="col-sm-3 col-form-label"> Date: </label>
+                    <label className="col-sm-3 col-form-label"> {t('Date')}: </label>
                     <DateTimePicker
                         className="col-sm-9"
                         onChange={onChangeDateTime}
@@ -90,7 +90,7 @@ export const ListNewRowFormModal = ({ type }) => {
                     className="modal-save"
                 >
                     <i className="far fa-save"></i>
-                    <span> Save </span>
+                    <span> {t('Save')} </span>
                 </button>
             </form>
         </>

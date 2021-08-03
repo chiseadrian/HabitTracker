@@ -4,7 +4,7 @@ import { calculateTotalMonth } from '../../helpers/calculateTotal';
 import { colors } from '../../static/colors';
 
 
-export const MonthTable = ({ days, routines, last }) => {
+export const MonthTable = ({ days, routines, last, t }) => {
     const monthData = calculateTotalMonth(days, routines, parseInt(last.format('DD')));
 
     return (
@@ -12,11 +12,11 @@ export const MonthTable = ({ days, routines, last }) => {
             <table className="table table-striped mt-5">
                 <thead>
                     <tr className="table-header">
-                        <th scope="col" style={{ width: '20%' }}>Routine</th>
-                        <th scope="col">Average</th>
-                        <th scope="col" >Done</th>
-                        <th scope="col" >Goal</th>
-                        <th scope="col" >%</th>
+                        <th scope="col" style={{ width: '20%' }}>{t('Routine')}</th>
+                        <th scope="col">{t('Average')}</th>
+                        <th scope="col" >{t('Done')}</th>
+                        <th scope="col" >{t('Goal')}</th>
+                        <th scope="col" >{t('Completed')} (%)</th>
                     </tr>
                 </thead>
                 <tbody>

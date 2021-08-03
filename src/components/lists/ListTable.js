@@ -6,7 +6,7 @@ import { listTableFormat } from '../../helpers/tableFormat';
 import { ListRow } from './ListRow';
 
 
-export const ListTable = ({ list }) => {
+export const ListTable = ({ list, t }) => {
     const dispatch = useDispatch();
     const { columns, values } = list;
     const { rows, dates } = listTableFormat(values, columns);
@@ -29,7 +29,7 @@ export const ListTable = ({ list }) => {
                             </button>
                         </th>
                         <th scope="row" width="50px"></th>
-                        <th scope="col" width="180px" style={{ minWidth: '160px' }}>Date</th>
+                        <th scope="col" width="180px" style={{ minWidth: '160px' }}>{t('Date')}</th>
                         {
                             columns.map((column, i) => (
                                 <th scope="col" key={i} width={`${75 / columns.length}%`}>{column}</th>
@@ -46,10 +46,11 @@ export const ListTable = ({ list }) => {
                                         key={i}
                                         row={row}
                                         date={dates[i]}
+                                        t={t}
                                     />
                                 ))
                             )
-                            : <tr><th colSpan={columns.length + 3} style={{ textAlign: 'center' }}>No data available</th></tr>
+                            : <tr><th colSpan={columns.length + 3} style={{ textAlign: 'center' }}>{t('No data available')}</th></tr>
                     }
                 </tbody>
             </table >

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 import { useSelector } from 'react-redux';
+import i18next from 'i18next';
 
 import { Sidebar } from '../components/ui/Sidebar';
 import { Home } from '../components/home/Home';
@@ -14,6 +15,11 @@ import { TimerScreen } from '../components/timer/TimerScreen';
 
 export const DashboardRoutes = () => {
     const { sidebarOpen } = useSelector(state => state.ui);
+    const { language } = useSelector(state => state.auth);
+
+    useEffect(() => {
+        i18next.changeLanguage(language);
+    }, [language])
 
     return (
         <>

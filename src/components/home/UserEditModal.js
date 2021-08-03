@@ -64,17 +64,17 @@ export const UserEditModal = () => {
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         if (name === '' || email === '')
-            return Swal.fire('Name and email are required!', '', 'warning');
+            return Swal.fire(t('Name and email are required!'), '', 'warning');
 
         if (newPassword !== '' || newPassword2 !== '') {
             if (newPassword !== newPassword2)
-                return Swal.fire("Password don't match!", '', 'warning');
+                return Swal.fire(t("Password don't match"), '', 'warning');
 
             if (newPassword.length < 6 || newPassword2.length < 6)
-                return Swal.fire('The password must be at least 6 characters!', '', 'warning');
+                return Swal.fire(t('The password must be at least 6 characters'), '', 'warning');
 
             if (/\s/.test(newPassword)) {
-                return Swal.fire("Password cannot have spaces!", '', 'warning');
+                return Swal.fire(t("Password cannot have spaces"), '', 'warning');
             }
         }
 

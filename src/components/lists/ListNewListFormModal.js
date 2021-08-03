@@ -12,7 +12,7 @@ const initState = {
     columns: []
 }
 
-export const ListNewListFormModal = ({ type }) => {
+export const ListNewListFormModal = ({ type, t }) => {
     const dispatch = useDispatch();
     const { activeList } = useSelector(state => state.list);
     const [formValues, handleInputChange, setFormValues] = useForm(initState);
@@ -29,11 +29,11 @@ export const ListNewListFormModal = ({ type }) => {
         e.preventDefault();
         let errors = false;
         if (name === '' || columns.length === 0)
-            return Swal.fire('All fields are required !', '', 'warning');
+            return Swal.fire(t('All fields are required'), '', 'warning');
 
         columns.forEach(col => {
             if (col === "") {
-                Swal.fire('All columns must have a name!', '', 'warning');
+                Swal.fire(t('All columns must have a name'), '', 'warning');
                 errors = true;
             }
         });
@@ -59,12 +59,12 @@ export const ListNewListFormModal = ({ type }) => {
     const handleDeleteList = () => {
         Swal.fire({
             title: 'Delete List',
-            text: `Are you sure you want to permanently delete "${name}" list?`,
+            text: `${t('Are you sure you want to permanently delete')} "${name}" ${t('list')}?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: t('Yes, delete it')
         }).then((result) => {
             if (result.isConfirmed)
                 dispatch(listStartDeleteList(activeList.id));
@@ -87,7 +87,7 @@ export const ListNewListFormModal = ({ type }) => {
     return (
         <>
             <div className="modal-title">
-                <h2 className="ml-1"> {(type === 'update') ? 'Edit' : (type === 'add') && 'Add'} List </h2>
+                <h2 className="ml-1"> {(type === 'update') ? t('Edit') : (type === 'add') && t('Add')} {t('List')} </h2>
 
                 {
                     (type === 'update') && (
@@ -102,12 +102,12 @@ export const ListNewListFormModal = ({ type }) => {
                 onSubmit={handleSubmitForm}
             >
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> Name: </label>
+                    <label className="col-sm-3 col-form-label"> {t('Name')}: </label>
                     <div className="col-sm-9">
                         <input
                             type="text"
                             className={`form-control ${(name === "") ? 'modal-border-error' : 'modal-border'}`}
-                            placeholder="e.g. Meals"
+                            placeholder={`${t('e.g.')} ${t('Meals')}`}
                             autoComplete="off"
                             name="name"
                             value={name}
@@ -118,7 +118,7 @@ export const ListNewListFormModal = ({ type }) => {
                 <br />
 
                 <div className="form-group row">
-                    <label className="col-sm-3 col-form-label"> Columns: </label>
+                    <label className="col-sm-3 col-form-label"> {t('Columns')}: </label>
                     <div className="col-sm-9">
                         {
                             columns.map((column, pos) => (
@@ -126,7 +126,7 @@ export const ListNewListFormModal = ({ type }) => {
                                     <input
                                         type="text"
                                         className={`form-control ${(column === "") ? 'modal-border-error' : 'modal-border'}`}
-                                        placeholder="e.g. Breakfast"
+                                        placeholder={`${t('e.g.')} ${t('Breakfast')}`}
                                         autoComplete="off"
                                         name={pos}
                                         value={column}
@@ -145,8 +145,8 @@ export const ListNewListFormModal = ({ type }) => {
                             className="modal-add-column"
                             onClick={() => setFormValues({ ...formValues, columns: [...columns, ''] })}
                         >
-                            Add column +
-                </p>
+                            {t('Add column')} +
+                        </p>
                     </div>
                 </div>
                 <br />
@@ -156,7 +156,7 @@ export const ListNewListFormModal = ({ type }) => {
                     className="modal-save"
                 >
                     <i className="far fa-save"></i>
-                    <span> Save </span>
+                    <span> {t('Save')} </span>
                 </button>
             </form>
         </>

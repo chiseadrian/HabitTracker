@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import { MonthChart } from './MonthChart'
@@ -8,8 +9,8 @@ import { MainTopBar } from '../ui/MainTopBar';
 import { dateMonth } from '../../helpers/dateFormat';
 import { MonthTable } from './MonthTable';
 
-
 export const MonthScreen = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { routines } = useSelector(state => state.routine);
     const { days } = useSelector(state => state.week);
@@ -37,12 +38,14 @@ export const MonthScreen = () => {
                 handleForward={() => switchMonth(1)}
                 title={topBar.title}
                 last={topBar.last}
+                t={t}
             />
 
             <div className="content-scroll-y">
                 < MonthChart
                     days={days}
                     routines={routines}
+                    t={t}
                 />
 
                 {
@@ -51,6 +54,7 @@ export const MonthScreen = () => {
                             days={days}
                             routines={routines}
                             last={last}
+                            t={t}
                         />
                     )
                 }

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { MainTopBar } from '../ui/MainTopBar';
 import { timeToTimerFormat } from '../../helpers/timeFormat';
 
 
 export const TimerScreen = () => {
+    const { t } = useTranslation();
     const [play, setPlay] = useState(false);
     const [initial, setInitial] = useState(null);
     const [diff, setDiff] = useState(null);
@@ -45,7 +47,7 @@ export const TimerScreen = () => {
 
     return (
         <div className="fill-parent align-center" style={{ background: '#212529' }}>
-            <MainTopBar title={'Timer'} />
+            <MainTopBar title={'Timer'} t={t} />
 
             <div className="content-scroll-y">
                 <div className="timer">

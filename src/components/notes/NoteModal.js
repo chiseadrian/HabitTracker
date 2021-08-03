@@ -16,7 +16,7 @@ const initEvent = {
     body: '',
 }
 
-export const NoteModal = () => {
+export const NoteModal = ({ t }) => {
     const dispatch = useDispatch();
     const { modalNoteOpen } = useSelector(state => state.ui);
     const { activeNote } = useSelector(state => state.note);
@@ -28,7 +28,7 @@ export const NoteModal = () => {
     const handleSubmitForm = (e) => {
         e.preventDefault();
         if (title === '' || body === '')
-            return Swal.fire('All fields are required !', '', 'warning');
+            return Swal.fire(t('All fields are required'), '', 'warning');
 
         (activeNote)
             ? dispatch(noteStartUpdate(formValues))
@@ -39,13 +39,13 @@ export const NoteModal = () => {
 
     const handleDelete = () => {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: t('Are you sure'),
+            text: t("You won't be able to revert this"),
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: t('Yes, delete it')
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(noteStartDelete(activeNote.id));
@@ -75,7 +75,7 @@ export const NoteModal = () => {
             closeTimeoutMS={200}
         >
             <div className="modal-title">
-                <h2 className="ml-1">{(activeNote) ? "Edit" : "New"} note</h2>
+                <h2 className="ml-1">{(activeNote) ? t('Edit') : t('Add')} {t('note')}</h2>
 
                 {
                     (activeNote) && (
@@ -94,7 +94,7 @@ export const NoteModal = () => {
                     <input
                         type="text"
                         className={`form-control ${(title === "") ? 'modal-border-error' : 'modal-border'}`}
-                        placeholder="Title..."
+                        placeholder={`${t('Title')}...`}
                         name="title"
                         autoComplete="off"
                         value={title}
@@ -107,7 +107,7 @@ export const NoteModal = () => {
                     <textarea
                         type="text"
                         className={`form-control text-area ${(body === "") ? 'modal-border-error' : 'modal-border'}`}
-                        placeholder="Note..."
+                        placeholder={`${t('Note')}...`}
                         rows="5"
                         name="body"
                         value={body}
@@ -121,7 +121,7 @@ export const NoteModal = () => {
                     className="modal-save"
                 >
                     <i className="far fa-save"></i>
-                    <span> Save </span>
+                    <span> {t('Save')} </span>
                 </button>
             </form>
 

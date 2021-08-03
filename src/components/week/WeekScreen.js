@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import { WeekTable } from './WeekTable';
@@ -13,12 +14,14 @@ import { dateWeek } from '../../helpers/dateFormat';
 
 
 export const WeekScreen = () => {
+    const { t } = useTranslation();
     const { routines } = useSelector(state => state.routine);
     const { changes, days } = useSelector(state => state.week);
     const [currentDate, setCurentDate] = useState(new Date());
 
     const tableRows = weekTableFormat(days, routines);
     const { monday, sunday, weekDays } = dateWeek(currentDate);
+
     const topBar = {
         title: `${monday.format('DD MMMM')} - ${sunday.format('DD MMMM YYYY')}`,
         last: (sunday.add(1, 'days').toDate().getTime() >= new Date().getTime())
@@ -35,6 +38,7 @@ export const WeekScreen = () => {
                 handleForward={() => switchWeek(7)}
                 title={topBar.title}
                 last={topBar.last}
+                t={t}
             />
 
             <div className="content-scroll-y">
@@ -44,12 +48,13 @@ export const WeekScreen = () => {
                     tableRows={tableRows}
                     currentDate={currentDate}
                     weekDays={weekDays}
+                    t={t}
                 />
 
-                <WeekChart days={getDaysDoneToChart(tableRows)} />
+                <WeekChart days={getDaysDoneToChart(tableRows)} t={t} />
 
                 {
-                    (changes.length > 0) && <AddNewFab type="guardar" />
+                    (changes.length > 0) && <AddNewFab type="guardar" t={t} />
                 }
             </div>
         </div>

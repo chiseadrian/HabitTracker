@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { listStartLoading } from '../../actions/list';
 import { uiOpenListModal } from '../../actions/ui';
@@ -11,6 +12,7 @@ import { ListTable } from './ListTable';
 
 
 export const ListsScreen = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const { lists, activeList } = useSelector(state => state.list)
 
@@ -26,7 +28,7 @@ export const ListsScreen = () => {
 
     return (
         <div className="fill-parent align-center">
-            <MainTopBar title={'Lists'} />
+            <MainTopBar title={'Lists'} t={t} />
 
             <div className="content-scroll-y">
                 <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
@@ -53,11 +55,11 @@ export const ListsScreen = () => {
 
                 {
                     (activeList)
-                        ? <ListTable list={activeList} />
+                        ? <ListTable list={activeList} t={t} />
                         : <div className="pointer-message" onClick={handleAddList}> Add list </div>
                 }
 
-                <ListModal />
+                <ListModal t={t} />
 
                 {
                     (lists.length > 0) && <AddNewFab type='list-row' />

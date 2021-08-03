@@ -3,7 +3,7 @@ import React from 'react';
 import { ToggleSidebar } from './ToggleSidebar';
 
 
-export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
+export const MainTopBar = ({ handleBack, handleForward, title, last, t }) => {
     return (
         <div className="main__top-bar">
             <div>
@@ -18,7 +18,7 @@ export const MainTopBar = ({ handleBack, handleForward, title, last }) => {
                 }
             </div>
 
-            <div className="top-bar-title"> {title} </div>
+            <div className="top-bar-title"> {t(title)} </div>
 
             {
                 (handleForward)
