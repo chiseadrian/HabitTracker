@@ -20,7 +20,7 @@ export const listStartLoading = () => {
     }
 }
 
-export const listStartAddNew = (list) => {
+export const listStartAddNew = (list, t) => {
     return async (dispatch, getState) => {
         const { uid, name } = getState().auth;
 
@@ -37,14 +37,14 @@ export const listStartAddNew = (list) => {
                 dispatch(listAddNewList(list));
             }
             else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const listStartDeleteList = (id) => {
+export const listStartDeleteList = (id, t) => {
     return async (dispatch, getState) => {
 
         try {
@@ -52,7 +52,13 @@ export const listStartDeleteList = (id) => {
             const body = await resp.json();
             if (body.ok) {
                 await dispatch(listDelete(id));
-                Swal.fire('Deleted!', 'Your list has been deleted.', 'success');
+                Swal.fire({
+                    icon: 'success',
+                    title: t('Deleted'),
+                    text: t('Your list has been deleted'),
+                    showConfirmButton: false,
+                    timer: 1500
+                });
 
                 const { lists } = getState().list;
                 (lists.length > 0)
@@ -61,22 +67,22 @@ export const listStartDeleteList = (id) => {
 
                 dispatch(uiCloseModal());
             } else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const listStartUpdateList = (list) => {
-    return async (dispatch, getState) => {
+export const listStartUpdateList = (list, t) => {
+    return async (dispatch) => {
         try {
             const resp = await fetchConToken(`lists/${list.id}`, list, 'PUT');
             const body = await resp.json();
 
             (body.ok)
                 ? dispatch(listUpdate(list))
-                : Swal.fire('Error', body.msg, 'error');
+                : Swal.fire('Error', t(body.msg), 'error');
 
             dispatch(listSetActive(list));
         } catch (error) {
@@ -85,7 +91,7 @@ export const listStartUpdateList = (list) => {
     }
 }
 
-export const listStartRow = (type, row) => {
+export const listStartRow = (type, row, t) => {
     return async (dispatch, getState) => {
         if (type === 'add') {
             await dispatch(listAddNewRow(row));
@@ -103,7 +109,7 @@ export const listStartRow = (type, row) => {
 
             (body.ok)
                 ? dispatch(listUpdate(list))
-                : Swal.fire('Error', body.msg, 'error');
+                : Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }

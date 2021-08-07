@@ -31,8 +31,8 @@ export const NoteModal = ({ t }) => {
             return Swal.fire(t('All fields are required'), '', 'warning');
 
         (activeNote)
-            ? dispatch(noteStartUpdate(formValues))
-            : dispatch(noteStartAddNew({ ...formValues, date: new Date().getTime() }));
+            ? dispatch(noteStartUpdate(formValues, t))
+            : dispatch(noteStartAddNew({ ...formValues, date: new Date().getTime() }, t));
 
         closeModal();
     }
@@ -48,7 +48,7 @@ export const NoteModal = ({ t }) => {
             confirmButtonText: t('Yes, delete it')
         }).then((result) => {
             if (result.isConfirmed) {
-                dispatch(noteStartDelete(activeNote.id));
+                dispatch(noteStartDelete(activeNote.id, t));
             }
         })
     }

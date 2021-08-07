@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Swal from 'sweetalert2';
 
 import { startRegister } from '../../actions/auth';
@@ -13,6 +14,7 @@ const initRegister = {
 }
 
 export const RegisterForm = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [formValues, handleInputChange] = useForm(initRegister);
@@ -23,11 +25,11 @@ export const RegisterForm = () => {
         await setLoading(true);
 
         if (email === '' || password1 === '' || password2 === '' || name === '') {
-            Swal.fire('Fill all fields to register!', '', 'warning');
+            Swal.fire(t('All fields are required'), '', 'warning');
         } else if (password1 !== password2) {
-            Swal.fire('Passwords have to match!', '', 'warning');
+            Swal.fire('Passwords have to match', '', 'warning');
         } else {
-            dispatch(startRegister(email.trim(), password1, name));
+            dispatch(startRegister(email.trim(), password1, name, t));
         }
 
         setLoading(false);
@@ -40,7 +42,7 @@ export const RegisterForm = () => {
                     <input
                         type="text"
                         className="form-control register-input"
-                        placeholder="Name"
+                        placeholder={t('Name')}
                         name="name"
                         value={name}
                         onChange={handleInputChange}
@@ -50,7 +52,7 @@ export const RegisterForm = () => {
                     <input
                         type="email"
                         className="form-control register-input"
-                        placeholder="Email"
+                        placeholder={t('Email')}
                         name="email"
                         value={email}
                         onChange={handleInputChange}
@@ -60,7 +62,7 @@ export const RegisterForm = () => {
                     <input
                         type="password"
                         className="form-control register-input"
-                        placeholder="Password"
+                        placeholder={t('Password')}
                         name="password1"
                         value={password1}
                         onChange={handleInputChange}
@@ -71,7 +73,7 @@ export const RegisterForm = () => {
                     <input
                         type="password"
                         className="form-control register-input"
-                        placeholder="Repeat password"
+                        placeholder={t('Repeat Password')}
                         name="password2"
                         value={password2}
                         onChange={handleInputChange}
@@ -82,7 +84,7 @@ export const RegisterForm = () => {
                     <input
                         type="submit"
                         className="btnSubmit"
-                        value="Create account" />
+                        value={t('Create Account')} />
                 </div>
             </fieldset>
         </form>

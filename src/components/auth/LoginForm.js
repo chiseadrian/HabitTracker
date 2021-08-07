@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Swal from 'sweetalert2';
 
 import { useForm } from '../../hooks/useForm';
@@ -11,6 +12,7 @@ const initLogin = {
 }
 
 export const LoginForm = () => {
+    const { t } = useTranslation();
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [formValues, handleInputChange] = useForm(initLogin);
@@ -22,8 +24,8 @@ export const LoginForm = () => {
         await setLoading(true);
 
         (email === '' || password === '')
-            ? Swal.fire('Fill all fields to login!', '', 'warning')
-            : dispatch(startLogin(email.trim(), password));
+            ? Swal.fire(t('All fields are required'), '', 'warning')
+            : dispatch(startLogin(email.trim(), password, t));
 
         setLoading(false);
     }
@@ -35,7 +37,7 @@ export const LoginForm = () => {
                     <input
                         type="text"
                         className="form-control login-input"
-                        placeholder="Email"
+                        placeholder={t('Email')}
                         name="email"
                         value={email}
                         onChange={handleInputChange}
@@ -45,7 +47,7 @@ export const LoginForm = () => {
                     <input
                         type="password"
                         className="form-control login-input"
-                        placeholder="Password"
+                        placeholder={t('Password')}
                         name="password"
                         value={password}
                         onChange={handleInputChange}
@@ -55,7 +57,7 @@ export const LoginForm = () => {
                     <input
                         type="submit"
                         className="btnSubmit"
-                        value="Login"
+                        value={t('Login')}
                     />
                 </div>
             </fieldset>

@@ -17,7 +17,7 @@ export const noteStartLoading = () => {
     }
 }
 
-export const noteStartAddNew = (note) => {
+export const noteStartAddNew = (note, t) => {
     return async (dispatch, getState) => {
         const { uid, name } = getState().auth;
 
@@ -35,14 +35,14 @@ export const noteStartAddNew = (note) => {
                 dispatch(noteAddNew(note))
             }
             else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const noteStartUpdate = (note) => {
+export const noteStartUpdate = (note, t) => {
     return async (dispatch) => {
         try {
             const resp = await fetchConToken(`notes/${note.id}`, note, 'PUT');
@@ -50,14 +50,14 @@ export const noteStartUpdate = (note) => {
 
             (body.ok)
                 ? dispatch(noteUpdate(note))
-                : Swal.fire('Error', body.msg, 'error');
+                : Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const noteStartDelete = (id) => {
+export const noteStartDelete = (id, t) => {
     return async (dispatch) => {
         try {
             const resp = await fetchConToken(`notes/${id}`, {}, 'DELETE');
@@ -67,9 +67,15 @@ export const noteStartDelete = (id) => {
                 dispatch(noteDelete(id));
                 dispatch(noteClearActive());
                 dispatch(uiCloseModal());
-                Swal.fire('Deleted!', 'Your note has been deleted.', 'success')
+                Swal.fire({
+                    icon: 'success',
+                    title: t('Deleted'),
+                    text: t('Your note has been deleted'),
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }

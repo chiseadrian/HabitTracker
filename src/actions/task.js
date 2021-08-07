@@ -24,19 +24,19 @@ export const dayStartLoading = (period, date) => {
     }
 }
 
-export const taskStartSave = () => {
+export const taskStartSave = (t) => {
     return async (dispatch, getState) => {
         const changes = getState().week.changes;
         let errors = false;
 
         try {
             changes.forEach(async change => {
-                const { newDone, error } = calculateDone(change, errors);
+                const { newDone, error } = calculateDone(change, t);
                 change.done = newDone;
                 errors = error;
 
                 if (!errors)
-                    await updateChange(dispatch, change);
+                    await updateChange(dispatch, change, t);
             });
 
             if (!errors) {
@@ -44,18 +44,18 @@ export const taskStartSave = () => {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Saved successfully!',
+                    title: t('Saved successfully'),
                     showConfirmButton: false,
                     timer: 1500
                 });
             }
         } catch (error) {
-            Swal.fire('Incorrect Format', 'e.g 1:30', 'error');
+            Swal.fire(t('Incorrect Format'), `${t('e.g.')} 1: 30`, 'error');
         }
     }
 }
 
-const calculateDone = ({ values }) => {
+const calculateDone = ({ values }, t) => {
     let newDone = 0;
     let error = false;
 
@@ -65,7 +65,7 @@ const calculateDone = ({ values }) => {
 
         if (time === null) {
             error = true;
-            Swal.fire('Incorrect Format', 'e.g 1:30', 'error');
+            Swal.fire(t('Incorrect Format'), `${t('e.g.')} 1: 30`, 'error');
         } else {
             newDone += time
         }
@@ -74,7 +74,7 @@ const calculateDone = ({ values }) => {
     return { newDone, error };
 }
 
-const updateChange = async (dispatch, change) => {
+const updateChange = async (dispatch, change, t) => {
     const { id, done, values } = change;
     let resp = null;
     let body = null;
@@ -82,13 +82,13 @@ const updateChange = async (dispatch, change) => {
     try {
         (id === undefined)
             ? resp = await fetchConToken('days', change, 'POST')                    //si el dia no existe, se crea
-            : resp = await fetchConToken(`days/${id}`, { done, values }, 'PUT');    //si existe se actualiza
+            : resp = await fetchConToken(`days / ${id} `, { done, values }, 'PUT');    //si existe se actualiza
 
         body = await resp.json();
 
         (body.ok)
             ? dispatch(taskUpdate(change))
-            : Swal.fire('Error', body.msg, 'error');
+            : Swal.fire('Error', t(body.msg), 'error');
     } catch (error) {
         console.log(error);
     }

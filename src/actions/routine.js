@@ -18,7 +18,7 @@ export const routineStartLoading = () => {
     }
 }
 
-export const routineStartAddNew = (routine) => {
+export const routineStartAddNew = (routine, t) => {
     return async (dispatch, getState) => {
         const { uid, name } = getState().auth;
 
@@ -36,14 +36,14 @@ export const routineStartAddNew = (routine) => {
                 dispatch(routineAddNew(routine))
             }
             else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const routineStartDelete = (id) => {
+export const routineStartDelete = (id, t) => {
     return async (dispatch) => {
         try {
             const resp = await fetchConToken(`routines/${id}`, {}, 'DELETE');
@@ -51,16 +51,23 @@ export const routineStartDelete = (id) => {
 
             if (body.ok) {
                 dispatch(routineDelete(id));
-                Swal.fire('Deleted!', 'Your routine has been deleted.', 'success')
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: t('Deleted'),
+                    text: t('Your routine has been deleted'),
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else
-                Swal.fire('Error', body.msg, 'error');
+                Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-export const routineStartUpdate = (routine) => {
+export const routineStartUpdate = (routine, t) => {
     return async (dispatch) => {
         try {
             const resp = await fetchConToken(`routines/${routine.id}`, routine, 'PUT');
@@ -68,7 +75,7 @@ export const routineStartUpdate = (routine) => {
 
             (body.ok)
                 ? dispatch(routineUpdate(routine))
-                : Swal.fire('Error', body.msg, 'error');
+                : Swal.fire('Error', t(body.msg), 'error');
         } catch (error) {
             console.log(error);
         }

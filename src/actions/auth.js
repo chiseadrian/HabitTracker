@@ -9,25 +9,25 @@ import { taskClear } from './task';
 import { uiCloseModal } from './ui';
 
 
-export const startLogin = (email, password) => {
+export const startLogin = (email, password, t) => {
     return async (dispatch) => {
         const resp = await fetchSinToken('auth', { email, password }, 'POST');
         const body = await resp.json();
 
-        auxLogin(dispatch, body);
+        auxLogin(dispatch, body, t);
     }
 }
 
-export const startGoogleLogin = (id_token) => {
+export const startGoogleLogin = (id_token, t) => {
     return async (dispatch) => {
         const resp = await fetchSinToken('auth/google', { id_token }, 'POST');
         const body = await resp.json();
 
-        auxLogin(dispatch, body);
+        auxLogin(dispatch, body, t);
     }
 }
 
-export const startRegister = (email, password, name) => {
+export const startRegister = (email, password, name, t) => {
     return async () => {
         const resp = await fetchSinToken('auth/new', { email, password, name }, 'POST');
         const body = await resp.json();
@@ -35,12 +35,12 @@ export const startRegister = (email, password, name) => {
         if (body.ok) {
             saveTokenInLocalStorage(body.token);
             Swal.fire(
-                'Verify account',
-                `We sent an email to ${email} to make sure you own it. Please check your inbox and verify your email`,
+                t('Verify account'),
+                `${t('We sent an email to')} ${email} ${t('to make sure you own it. Please check your inbox and verify your email')}`,
                 'info'
             );
         } else {
-            Swal.fire('Error', body.msg, 'error');
+            Swal.fire('Error', t(body.msg), 'error');
         }
     }
 }
@@ -64,7 +64,7 @@ export const startCheckin = () => {
     }
 }
 
-export const startUpdateUser = (newUserData) => {
+export const startUpdateUser = (newUserData, t) => {
     return async (dispatch) => {
         const resp = await fetchConToken('auth/updateUser', newUserData, 'POST');
         const body = await resp.json();
@@ -80,12 +80,12 @@ export const startUpdateUser = (newUserData) => {
             dispatch(uiCloseModal());
             Swal.fire({
                 icon: 'success',
-                title: 'Updated profile',
+                title: t('Updated profile'),
                 showConfirmButton: false,
                 timer: 1500
             });
         } else {
-            Swal.fire('Error', body.msg, 'error');
+            Swal.fire('Error', t(body.msg), 'error');
         }
     }
 }
@@ -100,7 +100,7 @@ export const startLogout = () => {
     }
 }
 
-const auxLogin = (dispatch, body) => {
+const auxLogin = (dispatch, body, t) => {
     const { ok, token, uid, name, email, msg } = body;
 
     if (ok) {
@@ -113,7 +113,7 @@ const auxLogin = (dispatch, body) => {
             language: body.language
         }));
     } else {
-        Swal.fire('Error', msg, 'error');
+        Swal.fire('Error', t(msg), 'error');
     }
 }
 const saveTokenInLocalStorage = (token) => {

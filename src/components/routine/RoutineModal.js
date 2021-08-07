@@ -43,8 +43,8 @@ export const RoutineModal = ({ t }) => {
             return Swal.fire(t('Goal incorrect format!'), '', 'warning');
 
         (activeRoutine)
-            ? dispatch(routineStartUpdate(data))
-            : dispatch(routineStartAddNew({ ...data, date: new Date().getTime() }));
+            ? dispatch(routineStartUpdate(data, t))
+            : dispatch(routineStartAddNew({ ...data, date: new Date().getTime() }, t));
 
         closeModal();
     }

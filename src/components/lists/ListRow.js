@@ -24,7 +24,7 @@ export const ListRow = ({ row, date: id, t }) => {
             confirmButtonText: t('Yes, delete it')
         }).then((result) => {
             if (result.isConfirmed)
-                dispatch(listStartRow('delete', parseInt(id)));
+                dispatch(listStartRow('delete', parseInt(id), t));
         })
     }
 

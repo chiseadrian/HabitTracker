@@ -17,7 +17,7 @@ export const AddNewFab = ({ type, t }) => {
                 dispatch(uiOpenRoutineModal());
                 break;
             case 'guardar':
-                dispatch(taskStartSave());
+                dispatch(taskStartSave(t));
                 break;
             case 'list-row':
                 dispatch(uiOpenListModal('list-row-add'))

@@ -44,12 +44,12 @@ export const ListNewListFormModal = ({ type, t }) => {
                     ...formValues,
                     date: new Date().getTime(),
                     values: {}
-                }));
+                }, t));
             } else if (type === 'update') {
                 dispatch(listStartUpdateList({
                     ...activeList,
                     ...formValues
-                }));
+                }, t));
             }
 
             closeModal();
@@ -58,7 +58,7 @@ export const ListNewListFormModal = ({ type, t }) => {
 
     const handleDeleteList = () => {
         Swal.fire({
-            title: 'Delete List',
+            title: t('Delete List'),
             text: `${t('Are you sure you want to permanently delete')} "${name}" ${t('list')}?`,
             icon: 'warning',
             showCancelButton: true,
@@ -67,7 +67,7 @@ export const ListNewListFormModal = ({ type, t }) => {
             confirmButtonText: t('Yes, delete it')
         }).then((result) => {
             if (result.isConfirmed)
-                dispatch(listStartDeleteList(activeList.id));
+                dispatch(listStartDeleteList(activeList.id, t));
         })
     }
 

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useTranslation } from 'react-i18next';
 
-import i18next from 'i18next';
 import { useForm } from '../../hooks/useForm';
 import { uiCloseModal } from '../../actions/ui';
 import { modalCustomStyle } from '../../static/modalCustomStyle';
@@ -33,7 +32,6 @@ export const UserEditModal = () => {
 
 
     const handleLanguage = (lang) => {
-        i18next.changeLanguage(lang);
         setFormValues({ ...formValues, language: lang });
     }
 
@@ -56,7 +54,7 @@ export const UserEditModal = () => {
                     email,
                     newPassword,
                     language
-                }));
+                }, t));
             }
         });
     }
