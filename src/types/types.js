@@ -9,13 +9,6 @@ export const types = {
     uiSetError: '[ui] Set Error',
     uiSetBackgroundImage: '[ui] Set background image',
 
-    noteSetActive: '[note] Set Active',
-    noteClearActive: '[note] Clear Active',
-    noteLoaded: '[note] Loaded notes',
-    noteAddNew: '[note] Add new note',
-    noteUpdate: '[note] Update note',
-    noteClear: '[note] Clear notes',
-    noteDelete: '[note] Delete note',
 
     routineLoaded: '[routine] Loaded routine',
     routineAddNew: '[routine] Add new routine',
@@ -24,6 +17,14 @@ export const types = {
     routineSetActive: '[routine] Set active',
     routineClearActive: '[routine] Clear Active',
     routineClear: '[routine] Clear',
+
+    noteSetActive: '[note] Set Active',
+    noteClearActive: '[note] Clear Active',
+    noteLoaded: '[note] Loaded notes',
+    noteAddNew: '[note] Add new note',
+    noteUpdate: '[note] Update note',
+    noteClear: '[note] Clear notes',
+    noteDelete: '[note] Delete note',
 
     taskLoaded: '[note] Loaded days',
     taskUpdate: '[task] Update tasks',
