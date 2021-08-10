@@ -16,7 +16,7 @@ export const MonthTable = ({ days, routines, last, t }) => {
                         <th scope="col">{t('Average')}</th>
                         <th scope="col" >{t('Done')}</th>
                         <th scope="col" >{t('Goal')}</th>
-                        <th scope="col" >{t('Completed')} (%)</th>
+                        <th scope="col" >{t('Completed')}</th>
                     </tr>
                 </thead>
                 <tbody>

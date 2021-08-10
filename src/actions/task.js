@@ -31,7 +31,7 @@ export const taskStartSave = (t) => {
 
         try {
             changes.forEach(async change => {
-                const { newDone, error } = calculateDone(change, t);
+                const { newDone, error } = calculateDone(change, errors);
                 change.done = newDone;
                 errors = error;
 
@@ -55,7 +55,7 @@ export const taskStartSave = (t) => {
     }
 }
 
-const calculateDone = ({ values }, t) => {
+const calculateDone = ({ values }) => {
     let newDone = 0;
     let error = false;
 
@@ -65,7 +65,7 @@ const calculateDone = ({ values }, t) => {
 
         if (time === null) {
             error = true;
-            Swal.fire(t('Incorrect Format'), `${t('e.g.')} 1: 30`, 'error');
+            Swal.fire('Incorrect Format', 'e.g. 1: 30', 'error');
         } else {
             newDone += time
         }
@@ -82,7 +82,7 @@ const updateChange = async (dispatch, change, t) => {
     try {
         (id === undefined)
             ? resp = await fetchConToken('days', change, 'POST')                    //si el dia no existe, se crea
-            : resp = await fetchConToken(`days / ${id} `, { done, values }, 'PUT');    //si existe se actualiza
+            : resp = await fetchConToken(`days/${id}`, { done, values }, 'PUT');    //si existe se actualiza
 
         body = await resp.json();
 

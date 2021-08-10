@@ -35,7 +35,7 @@ export const WeekTable = ({ days, routines, tableRows, currentDate, weekDays, t 
                         <th scope="col" className="week__days-title">{t('Sun')}</th>
                         <th scope="col" className="week__done-title table-success">{t('Done')}</th>
                         <th scope="col" className="week__goal-title table-info">{t('Goal')}</th>
-                        <th scope="col" className="week__title-color table-warning">{t('Completed')} (%)</th>
+                        <th scope="col" className="week__title-color table-warning">{t('Completed')}</th>
                     </tr>
                 </thead>
                 <tbody>

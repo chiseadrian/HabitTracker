@@ -53,7 +53,7 @@ export const RoutineHabit = (routine) => {
                 </button>
             </th>
             <td>{name}</td>
-            <td>{frecuency}</td>
+            <td>{frecuency} {(frecuency === 1) ? t('Day') : t('Days')}</td>
             <td>{timeToTableFormat(goal)}</td>
         </tr>
     )
