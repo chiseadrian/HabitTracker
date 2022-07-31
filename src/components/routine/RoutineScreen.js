@@ -21,7 +21,7 @@ export const RoutineScreen = () => {
     }, [dispatch])
 
     return (
-        <div className="fill-parent">
+        <>
             <MainTopBar title={'Daily Routine'} t={t} />
 
             <div className="content-scroll-y">
@@ -31,6 +31,6 @@ export const RoutineScreen = () => {
                 <AddNewFab type="routine" t={t} />
                 <RoutineModal t={t} />
             </div>
-        </div>
+        </>
     )
 }

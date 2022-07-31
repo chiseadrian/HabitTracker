@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import { MonthChart } from './MonthChart'
-import { dayStartLoading } from '../../actions/task';
-import { MainTopBar } from '../ui/MainTopBar';
-import { dateMonth } from '../../helpers/dateFormat';
+import { dayStartLoading } from '../../../actions/task';
+import { MainTopBar } from '../../ui/MainTopBar';
+import { dateMonth } from '../../../helpers/dateFormat';
 import { MonthTable } from './MonthTable';
 
 export const MonthScreen = () => {
@@ -32,7 +32,7 @@ export const MonthScreen = () => {
     }, [dispatch, currentDate])
 
     return (
-        <div className="fill-parent">
+        <>
             <MainTopBar
                 handleBack={() => switchMonth(-1)}
                 handleForward={() => switchMonth(1)}
@@ -59,6 +59,6 @@ export const MonthScreen = () => {
                     )
                 }
             </div>
-        </div >
+        </ >
     )
 }

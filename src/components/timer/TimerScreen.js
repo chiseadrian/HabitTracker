@@ -46,7 +46,7 @@ export const TimerScreen = () => {
 
 
     return (
-        <div className="fill-parent align-center" style={{ background: '#212529' }}>
+        <div className="fill-parent align-center timer-screen">
             <MainTopBar title={'Timer'} t={t} />
 
             <div className="content-scroll-y">

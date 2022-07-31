@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { calculateTotalMonth } from '../../helpers/calculateTotal';
-import { colors } from '../../static/colors';
+import { calculateTotalMonth } from '../../../helpers/calculateTotal';
+import { colors } from '../../../static/colors';
 
 
 export const MonthTable = ({ days, routines, last, t }) => {

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { taskAddNewDay, taskUpdateChange } from '../../actions/task';
-import { getDateNumbers } from '../../helpers/dateFormat';
-import { checkIsInChanges, inChanges } from '../../helpers/inputTimeChanges';
-import { timeToMinutes } from '../../helpers/timeFormat';
+import { taskAddNewDay, taskUpdateChange } from '../../../actions/task';
+import { getDateNumbers } from '../../../helpers/dateFormat';
+import { checkIsInChanges, inChanges } from '../../../helpers/inputTimeChanges';
+import { timeToMinutes } from '../../../helpers/timeFormat';
 
 
 export const WeekTimeInput = ({ id, disabled, dayData, numDay, numMonth, numYear, weekChanged }) => {

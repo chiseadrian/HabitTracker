@@ -24,8 +24,6 @@ export const Home = () => {
             <div className="top-bar-home">
                 <ToggleSidebar />
 
-                {/* <i class="fas fa-user-secret"></i> */}
-
                 <button className="top-bar-buttons-home" onClick={handleUserEdit} >
                     <i className="fas fa-user-edit"></i>
                 </button>

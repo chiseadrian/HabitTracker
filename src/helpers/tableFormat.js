@@ -42,7 +42,7 @@ export const listTableFormat = (listValues, columns) => {
     for (let date in listValues) {
         let row = {};
         dates.push(date);
-        const dateString = moment(parseInt(date)).format("DD MMMM YYYY H:mm");
+        const dateString = moment(parseInt(date)).format("DD-MM-YYYY");
         row.date = dateString;
 
         const columns = listValues[date];

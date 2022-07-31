@@ -1,29 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { noteSetActive } from '../../actions/note';
-import { uiOpenNoteModal } from '../../actions/ui';
 
 
 export const Note = (note) => {
     const dispatch = useDispatch();
-    const { title, body } = note;
+    const { activeNote } = useSelector(state => state.note);
+    const { title } = note;
 
     const handleNote = () => {
         dispatch(noteSetActive(note));
-        dispatch(uiOpenNoteModal());
+    }
+
+    const isTheCurrentNote = () => {
+        if (activeNote)
+            return activeNote.id === note.id;
+
+        return false;
     }
 
 
     return (
-        <li
-            className="note"
-            onClick={handleNote}
-        >
-            <div className="note-card pointer">
-                <h2>{title}</h2>
-                <p>{body}</p>
-            </div>
-        </li>
+        <div className={isTheCurrentNote() ? 'note-active' : 'note-not-active'} onClick={handleNote}>
+            {title}
+        </div >
     )
 }

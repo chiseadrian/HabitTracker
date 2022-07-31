@@ -13,14 +13,12 @@ import { LoadingSpinner } from '../components/ui/LoadingSpinner';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
-    const { checking, uid } = useSelector(state => state.auth)
-
+    const { checking, uid } = useSelector(state => state.auth);
 
     useEffect(() => {
         dispatch(startCheckin());
         dispatch(getBackgroundImage());
     }, [dispatch]);
-
 
     if (checking)
         return <LoadingSpinner />;

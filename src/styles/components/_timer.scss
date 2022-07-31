@@ -1,21 +1,22 @@
-
-.timer{
+.timer {
     display: flex;
     font-size: 100px;
     justify-content: center;
     text-shadow: gray 3px 5px 2px;
     color: white;
 }
-.minutes{
+
+.minutes {
     width: 420px;
 }
-.milliseconds{
+
+.milliseconds {
     font-size: 60px;
     margin-top: 45px;
     width: 80px;
 }
 
-.start-timer{
+.start-timer {
     background: white;
     border: 3px solid $primary;
     border-radius: 100%;
@@ -26,13 +27,13 @@
     margin-right: 15px;
     width: 60px;
 
-    &:hover{
+    &:hover {
         background: $primary;
         color: white;
     }
 }
 
-.button-timer{
+.button-timer {
     background: white;
     border-radius: 100%;
     border: 3px solid black;
@@ -42,28 +43,33 @@
     margin-right: 15px;
     width: 60px;
 
-    &:hover{
-        background-color: black; 
+    &:hover {
+        background-color: black;
         color: white;
     }
-    &:disabled{
+
+    &:disabled {
         background-color: white;
         border: 3px solid gray;
         color: gray;
     }
 }
 
+.timer-screen {
+    background-color: $secondary;
+}
+
 
 @media (max-width: 768px) {
-    .timer{
+    .timer {
         font-size: 60px;
     }
 
-    .minutes{
+    .minutes {
         width: 245px;
     }
 
-    .milliseconds{
+    .milliseconds {
         font-size: 26px;
         width: 40px;
         margin-top: 39px;

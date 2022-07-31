@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { dateWeek } from '../../helpers/dateFormat';
-import { timeToTableFormat } from '../../helpers/timeFormat';
+import { dateWeek } from '../../../helpers/dateFormat';
+import { timeToTableFormat } from '../../../helpers/timeFormat';
 import { WeekTimeInput } from './WeekTimeInput';
 
 const today = new Date().getTime();

@@ -9,8 +9,10 @@ export const noteStartLoading = () => {
         try {
             const resp = await fetchConToken(`notes`);
             const body = await resp.json();
+            const notes = body.notes;
 
-            dispatch(notesLoaded(body.notes))
+            dispatch(notesLoaded(notes));
+            (notes.length > 0) && dispatch(noteSetActive(notes[0]));
         } catch (error) {
             console.log(error);
         }
@@ -22,7 +24,7 @@ export const noteStartAddNew = (note, t) => {
         const { uid, name } = getState().auth;
 
         try {
-            const resp = await fetchConToken('notes', note, 'POST');
+            const resp = await fetchConToken('notes', { ...note, date: new Date().getTime() }, 'POST');
             const body = await resp.json();
 
             if (body.ok) {
@@ -32,7 +34,8 @@ export const noteStartAddNew = (note, t) => {
                     name: name
                 }
 
-                dispatch(noteAddNew(note))
+                dispatch(noteAddNew(note));
+                dispatch(noteSetActive(note));
             }
             else
                 Swal.fire('Error', t(body.msg), 'error');
@@ -48,9 +51,12 @@ export const noteStartUpdate = (note, t) => {
             const resp = await fetchConToken(`notes/${note.id}`, note, 'PUT');
             const body = await resp.json();
 
-            (body.ok)
-                ? dispatch(noteUpdate(note))
-                : Swal.fire('Error', t(body.msg), 'error');
+            if (body.ok) {
+                dispatch(noteUpdate(note));
+                dispatch(noteSetActive(note));
+            } else {
+                Swal.fire('Error', t(body.msg), 'error');
+            }
         } catch (error) {
             console.log(error);
         }

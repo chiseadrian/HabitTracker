@@ -9,7 +9,6 @@ export const types = {
     uiSetError: '[ui] Set Error',
     uiSetBackgroundImage: '[ui] Set background image',
 
-
     routineLoaded: '[routine] Loaded routine',
     routineAddNew: '[routine] Add new routine',
     routineDelete: '[routine] Delete routine',

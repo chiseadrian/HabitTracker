@@ -18,8 +18,8 @@ export const dateWeek = (date) => {
     }
 
     return {
-        start: new Date(weekDays[0].year, weekDays[0].month - 1, weekDays[0].day).getTime(),
-        end: new Date(weekDays[6].year, weekDays[6].month - 1, weekDays[6].day).getTime(),
+        start: `${weekDays[0].day}-${weekDays[0].month}-${weekDays[0].year}`,
+        end: `${weekDays[6].day}-${weekDays[6].month}-${weekDays[6].year}`,
         monday,
         sunday,
         weekDays
@@ -27,13 +27,17 @@ export const dateWeek = (date) => {
 }
 
 export const dateMonth = (date) => {
-    const start = new Date(date.getFullYear(), date.getMonth(), 1).getTime();
-    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0).getTime();
-
+    const start = new Date(date.getFullYear(), date.getMonth(), 1);
+    const end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
     const first = moment(start);
     const last = moment(end);
 
-    return { first, last, start, end }
+    return {
+        start: `1-${start.getMonth() + 1}-${start.getFullYear()}`,
+        end: `${last.format('D')}-${end.getMonth() + 1}-${end.getFullYear()}`,
+        first,
+        last
+    }
 }
 
 export const giveStartEndPeriod = (period, date) => {

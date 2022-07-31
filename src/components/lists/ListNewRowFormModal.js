@@ -9,7 +9,6 @@ import { useForm } from '../../hooks/useForm';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 
-
 export const ListNewRowFormModal = ({ type, t }) => {
     const dispatch = useDispatch();
     const { activeList, activeRow } = useSelector(state => state.list);
@@ -18,7 +17,6 @@ export const ListNewRowFormModal = ({ type, t }) => {
     const initState = listColumnsInitState(columns);
     const [formValues, handleInputChange, setFormValues] = useForm(initState);
     const [dateTime, onChangeDateTime] = useState(new Date());
-
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
@@ -61,6 +59,7 @@ export const ListNewRowFormModal = ({ type, t }) => {
                     <label className="col-sm-3 col-form-label"> {t('Date')}: </label>
                     <DateTimePicker
                         className="col-sm-9"
+                        format="dd/MM/yyyy"
                         onChange={onChangeDateTime}
                         value={dateTime}
                     />

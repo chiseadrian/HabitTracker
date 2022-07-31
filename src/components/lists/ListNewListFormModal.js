@@ -9,6 +9,7 @@ import { uiCloseModal } from '../../actions/ui';
 
 const initState = {
     name: '',
+    showDate: '',
     columns: []
 }
 
@@ -88,7 +89,6 @@ export const ListNewListFormModal = ({ type, t }) => {
         <>
             <div className="modal-title">
                 <h2 className="ml-1"> {(type === 'update') ? t('Edit') : (type === 'add') && t('Add')} {t('List')} </h2>
-
                 {
                     (type === 'update') && (
                         <button className="delete modal-delete" onClick={handleDeleteList}>
@@ -97,13 +97,10 @@ export const ListNewListFormModal = ({ type, t }) => {
                     )
                 }
             </div>
-            <form
-                className="container"
-                onSubmit={handleSubmitForm}
-            >
+            <form className="container" onSubmit={handleSubmitForm} >
                 <div className="form-group row">
                     <label className="col-sm-3 col-form-label"> {t('Name')}: </label>
-                    <div className="col-sm-9">
+                    <div className="col-sm-9 mb-1">
                         <input
                             type="text"
                             className={`form-control ${(name === "") ? 'modal-border-error' : 'modal-border'}`}
@@ -114,10 +111,7 @@ export const ListNewListFormModal = ({ type, t }) => {
                             onChange={handleInputChange}
                         />
                     </div>
-                </div>
-                <br />
 
-                <div className="form-group row">
                     <label className="col-sm-3 col-form-label"> {t('Columns')}: </label>
                     <div className="col-sm-9">
                         {
@@ -151,10 +145,7 @@ export const ListNewListFormModal = ({ type, t }) => {
                 </div>
                 <br />
 
-                <button
-                    type="submit"
-                    className="modal-save"
-                >
+                <button type="submit" className="modal-save" >
                     <i className="far fa-save"></i>
                     <span> {t('Save')} </span>
                 </button>

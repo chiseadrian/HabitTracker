@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { WeekHabit } from './WeekHabit';
-import { timeToTableFormat } from '../../helpers/timeFormat';
-import { calculateTotalWeek } from '../../helpers/calculateTotal';
-import { dayStartLoading } from '../../actions/task';
+import { timeToTableFormat } from '../../../helpers/timeFormat';
+import { calculateTotalWeek } from '../../../helpers/calculateTotal';
+import { dayStartLoading } from '../../../actions/task';
 
 
 let weekChanged = false;

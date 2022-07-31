@@ -1,7 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-import { createMonthDatasets, getDaysMonthToChart } from '../../helpers/dataToChart';
+import { createMonthDatasets, getDaysMonthToChart } from '../../../helpers/dataToChart';
 
 
 export const MonthChart = ({ days, routines, t }) => {

@@ -6,11 +6,11 @@ import moment from 'moment';
 
 import { WeekTable } from './WeekTable';
 import { WeekChart } from './WeekChart';
-import { AddNewFab } from '../ui/AddNewFab';
-import { getDaysDoneToChart } from '../../helpers/dataToChart';
-import { weekTableFormat } from '../../helpers/tableFormat';
-import { MainTopBar } from '../ui/MainTopBar';
-import { dateWeek } from '../../helpers/dateFormat';
+import { AddNewFab } from '../../ui/AddNewFab';
+import { getDaysDoneToChart } from '../../../helpers/dataToChart';
+import { weekTableFormat } from '../../../helpers/tableFormat';
+import { MainTopBar } from '../../ui/MainTopBar';
+import { dateWeek } from '../../../helpers/dateFormat';
 
 
 export const WeekScreen = () => {
@@ -32,7 +32,7 @@ export const WeekScreen = () => {
     }
 
     return (
-        <div className="fill-parent">
+        <>
             <MainTopBar
                 handleBack={() => switchWeek(-7)}
                 handleForward={() => switchWeek(7)}
@@ -53,10 +53,8 @@ export const WeekScreen = () => {
 
                 <WeekChart days={getDaysDoneToChart(tableRows)} t={t} />
 
-                {
-                    (changes.length > 0) && <AddNewFab type="guardar" t={t} />
-                }
+                {(changes.length > 0) && <AddNewFab type="save-task" t={t} />}
             </div>
-        </div>
+        </>
     )
 }

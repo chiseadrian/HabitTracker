@@ -31,7 +31,7 @@ export const ListsScreen = () => {
             <MainTopBar title={'Lists'} t={t} />
 
             <div className="content-scroll-y">
-                <ul className="nav nav-tabs bg-dark" style={{ border: 'none' }}>
+                <ul className="nav nav-tabs" style={{ border: 'none' }}>
                     <div className="list-tab-scroll">
                         <li className="nav-item">
                             <button
