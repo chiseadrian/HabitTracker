@@ -22,7 +22,7 @@ export const SidebarScreen = () => {
         <ProSidebar collapsed={!sidebarOpen} id="sidebar" className={(!sidebarOpen) && 'active'}>
             <SidebarHeader>
                 <div className={(sidebarOpen) ? 'sidebar-header' : 'sidebar-closed-header'}>
-                    <img src={logo} className={`rotate ${(sidebarOpen) ? 'sidebar-logo' : 'sidebar-closed-logo'}`} />
+                    <img src={logo} className={`rotate ${(sidebarOpen) ? 'sidebar-logo' : 'sidebar-closed-logo'}`} alt="logo" />
                     {(sidebarOpen) && 'Habit Tracker'}
                 </div>
             </SidebarHeader>
