@@ -42,7 +42,7 @@ export const MonthScreen = () => {
             />
 
             <div className="content-scroll-y">
-                < MonthChart
+                <MonthChart
                     days={days}
                     routines={routines}
                     t={t}

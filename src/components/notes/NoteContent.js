@@ -1,10 +1,29 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
+import ReactQuill from 'react-quill';
+import hljs from 'highlight.js';
+import 'react-quill/dist/quill.snow.css';
+import 'highlight.js/styles/atom-one-dark.css';
 
 import { useForm } from '../../hooks/useForm';
 import { noteStartDelete } from '../../actions/note';
 import { AddNewFab } from '../ui/AddNewFab';
+import { useState } from 'react';
+
+const modules = {
+    syntax: {
+        highlight: text => hljs.highlightAuto(text).value,
+    },
+    toolbar: [
+        [{ 'font': [] }, { size: ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+        ['link', 'code-block'],
+        ['clean']
+    ]
+}
 
 const initEvent = {
     title: '',
@@ -16,7 +35,8 @@ export const NoteContent = ({ t }) => {
     const { activeNote } = useSelector(state => state.note);
 
     const [formValues, handleInputChange, setFormValues] = useForm(initEvent);
-    const { body, title } = formValues;
+    const { title } = formValues;
+    const [body, setBody] = useState('');
 
 
     const handleDelete = () => {
@@ -47,21 +67,35 @@ export const NoteContent = ({ t }) => {
     }
 
     useEffect(() => {
-        if (activeNote) setFormValues(activeNote);
-        else setFormValues(initEvent);
+        if (activeNote) {
+            setFormValues(activeNote);
+            setBody(activeNote.body);
+        }
+        else {
+            setFormValues(initEvent);
+            setBody('');
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeNote]);
+
 
     return (
         <div className="note-content content-scroll-y">
             <div className='flex'>
-                <input value={title} onChange={handleInputChange} name="title" placeholder='Title...' />
+                <input value={title} name="title" onChange={handleInputChange} placeholder='Title...' />
                 <i className="fas fa-trash-alt delete-icon" onClick={handleDelete}></i>
             </div>
-            <textarea value={body} onChange={handleInputChange} name="body" placeholder='Note...' />
 
-            {hasChanged() && <AddNewFab type="save-note" note={formValues} t={t} />}
-            {newNote() && <AddNewFab type="save-new-note" note={formValues} t={t} />}
-        </div>
+            <ReactQuill
+                theme="snow"
+                value={body}
+                modules={modules}
+                onChange={setBody}
+                placeholder='Note...'
+            />;
+
+            {hasChanged() && <AddNewFab type="save-note" note={{ ...formValues, body }} t={t} />}
+            {newNote() && <AddNewFab type="save-new-note" note={{ ...formValues, body }} t={t} />}
+        </div >
     )
 }

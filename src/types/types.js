@@ -25,7 +25,7 @@ export const types = {
     noteClear: '[note] Clear notes',
     noteDelete: '[note] Delete note',
 
-    taskLoaded: '[note] Loaded days',
+    taskLoaded: '[task] Loaded days',
     taskUpdate: '[task] Update tasks',
     taskClear: '[task] Clear tasks',
     taskClearChanges: '[task] Clear Changes',
